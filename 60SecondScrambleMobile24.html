@@ -1,0 +1,3202 @@
+<!DOCTYPE html>
+<!-- I Jason Ho declare that this is my work and it has not been copied or shared 
+     with anyone else.  
+     60 Second Scramble Nov 25, 2018
+     Written by Jason Ho - 000774370 -->
+<html>
+    <head>
+        <title>60 Second Scramble</title>
+        <meta name="viewport" content="width=device-width"> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>		
+        <style type="text/css">
+            @media only screen and (max-width: 29.9999em){
+                body{
+                    font-family:"lucida Console";
+                    text-shadow: darkSlateGrey 1px 1px 1px;
+                    font-weight: 900;
+                    background: linear-gradient(to bottom, #6600ff 0%, #5f9ea0 100%);
+                    width: 360px;
+                    font-size: 1.1em;
+                }
+                #login{
+                    visibility: hidden;
+                }
+                #formResult{
+                    text-align: center;
+                }
+                .purple{
+                    color: red;
+                }
+                .mainContainer{
+                    width: 100%;
+                    height: 100%;
+                    visibility: hidden;
+                }
+                .startContainer{
+                    width: 100%;
+                    height: 100%;
+                }
+                #mainInstruction{
+                    font-size: 1.5em;
+                }
+                #howToPlay{
+                    margin-top: -1px;
+                    position: fixed;
+                    width: 360px;
+                    height: 500px;
+                    background: linear-gradient(to bottom,gold 0%, silver 100%);
+                    list-style: none;
+                    text-align: justify;
+                    border: 2px solid black;
+                    border-radius: 10%;
+                    box-shadow: white 6px 2px 6px;
+                    visibility: hidden;
+                }
+                #singlePlayer, #login{
+                    margin-top: 130px;
+                    margin-left: 30px;
+                    position: fixed;
+                    width: 320px;
+                    height: 450px;
+                    background: linear-gradient(to bottom,mediumSeaGreen 0%, silver 100%);
+                    list-style: none;
+                    text-align: justify;
+                    border: 2px solid black;
+                    border-radius: 10%;
+                    box-shadow: white 6px 2px 6px;
+                }
+                .singlePlayerButton, .newGameButton{
+                    font-family: "lucida Console", serif;
+                    font-size: 1.5em;
+                    font-weight: bold;
+                    border: 3px solid black;
+                    text-align: center;
+                    background: linear-gradient(to bottom, #6600ff 0%, #5f9ea0 100%);
+                    border-radius: 20%;
+                    color: black;
+                    margin-left: 5%;
+                    width: 90%;
+                    padding: 3.5%;
+                    margin-top: 20%;
+                    margin-bottom: 8%;
+                    box-shadow: White 5px 8px 5px;
+                }
+                .labelSelect{
+                    padding-bottom: 3%;
+                    display: block;
+                }
+                .first1{
+                    display: block;
+                    text-align: center;
+                }
+                .text1{
+                    width: 200px;
+                    border: 2px solid mediumSeaGreen;
+                    border-radius: 20%;
+                }
+
+                .first2{
+                    display: block;
+                    text-align: center;
+                }
+                .text2{
+                    width: 200px;
+                    border: 2px solid mediumSeaGreen;
+                    border-radius: 20%;
+                    margin-left: 18%;
+                }
+                .password2{
+                    width: 200px;
+                    border: 2px solid mediumSeaGreen;
+                    border-radius: 20%;
+                }
+                .selectPlayerButton, .selectPlayerButton2{
+                    margin-left: 100px;
+                    width: 100px;
+                    background-color: mediumSeaGreen;
+                    border-radius: 30%;
+                    border-color: black;
+                    box-shadow: white 2px 1px 2px;
+                    font-weight: bold;
+                    margin-left: 20%;
+                }
+                .selectPlayerButton{
+                    margin-left: 100px;
+                }
+                .selectTable{
+                    margin-left: 10%;
+                    width: 340px;
+                }
+                .randomButton{
+                    font-family: "lucida Console", serif;
+                    font-size: 1.5em;
+                    font-weight: bold;
+                    border: 3px solid black;
+                    text-align: center;
+                    background: linear-gradient(to bottom, #6600ff 0%, #5f9ea0 100%);
+                    border-radius: 20%;
+                    color: black;
+                    margin-left: 5%;
+                    width: 90%;
+                    padding: 3.5%;
+                    margin-top: 20%;
+                    margin-bottom: 4%;
+                    box-shadow: White 5px 8px 5px;
+                }
+                .selectButton{
+                    font-family: "lucida Console", serif;
+                    font-size: 1.5em;
+                    font-weight: bold;
+                    border: 3px solid black;
+                    text-align: center;
+                    background: linear-gradient(to bottom, #6600ff 0%, #5f9ea0 100%);
+                    border-radius: 20%;
+                    color: black;
+                    margin-left: 5%;
+                    width: 83.5%;
+                    padding: 4%;
+                    margin-top: 20%;
+                    margin-bottom: 4%;
+                    box-shadow: White 5px 8px 5px;
+                }
+                .multiPlayerButton{
+                    margin-top: 20%;
+                }
+                .multiPlayerButton, .continueGameButton{
+                    font-family: "lucida Console", serif;
+                    font-size: 1.5em;
+                    font-weight: bold;
+                    border: 3px solid black;
+                    border-style: ridge;
+                    text-align: center;
+                    background: linear-gradient(to bottom, #6600ff 0%, #5f9ea0 100%);
+                    border-radius: 20%;
+                    color: black;
+                    margin-left: 5%;
+                    width: 90%;
+                    padding: 3.5%;
+                    margin-top: 1%;
+                    margin-bottom: 8%;
+                    box-shadow: White 5px 8px 5px;
+                }
+                #save{
+
+                }
+                #newGame, #currentGames, #selectPlayer{
+                    margin-top: 130px;
+                    margin-left: 30px;
+                    position: fixed;
+                    width: 320px;
+                    height: 450px;
+                    background: linear-gradient(to bottom,mediumSeaGreen 0%, silver 100%);
+                    list-style: none;
+                    text-align: justify;
+                    border: 2px solid black;
+                    border-radius: 10%;
+                    box-shadow: white 6px 2px 6px;
+                    visibility: hidden;
+                }
+                .h1{
+                    margin-top: 20px;
+                    margin-left: 30px;
+                    margin-bottom: 40px;
+                }
+                #label{
+                    padding-bottom: 3%;
+                    text-align: left;
+                }
+                .playTurnButton, .playTurnButton2{
+                    background: linear-gradient(to bottom, #6600ff 0%, #5f9ea0 100%);
+                    border-radius: 30%;
+                    border-color: black;
+                    box-shadow: white 2px 1px 2px;
+                    font-weight: bold;
+                    width: 80px;
+                    margin-left: 20%;
+                }
+                .playTurnButton2{
+                    margin-left: 20px;
+                }
+                .currentTable{
+                    margin-left: 15%;
+                }
+                #categories{
+                    margin-top: -1px;
+                    position: fixed;
+                    width: 360px;
+                    height: 500px;
+                    background: linear-gradient(to bottom,gold 0%, silver 100%);
+                    list-style: none;
+                    text-align: justify;
+                    border: 2px solid black;
+                    border-radius: 10%;
+                    box-shadow: white 6px 2px 6px;
+                    visibility: hidden;
+                }
+                .catColor{
+                    color: purple;
+                }
+                #howToWin{
+                    margin-top: -1px;
+                    position: fixed;
+                    width: 360px;
+                    height: 500px;
+                    background: linear-gradient(to bottom,gold 0%, silver 100%);
+                    list-style: none;
+                    text-align: justify;
+                    border: 2px solid black;
+                    border-radius: 10%;
+                    box-shadow: white 6px 2px 6px;
+                    visibility: hidden;  
+                }
+                .hSTitle{
+                    border: 2px solid mediumSeaGreen;
+                }
+                #scrambleTimer{
+                    margin-top: -1px;
+                    position: fixed;
+                    width: 360px;
+                    height: 500px;
+                    background: linear-gradient(to bottom,gold 0%, silver 100%);
+                    list-style: none;
+                    text-align: justify;
+                    border: 2px solid black;
+                    border-radius: 10%;
+                    box-shadow: white 6px 2px 6px;
+                    visibility: hidden;
+                }
+                #scramble{
+                    margin-top: -1px;
+                    position: fixed;
+                    width: 360px;
+                    height: 500px;
+                    background: linear-gradient(to bottom,gold 0%, silver 100%);
+                    list-style: none;
+                    text-align: justify;
+                    border: 2px solid black;
+                    border-radius: 10%;
+                    box-shadow: white 6px 2px 6px;
+                    visibility: hidden;
+                }
+                #scoring{
+                    margin-top: -1px;
+                    position: fixed;
+                    width: 360px;
+                    height: 500px;
+                    background: linear-gradient(to bottom,gold 0%, silver 100%);
+                    list-style: none;
+                    text-align: justify;
+                    border: 2px solid black;
+                    border-radius: 10%;
+                    box-shadow: white 6px 2px 6px;
+                    visibility: hidden;
+                }
+                #highScores{
+                    margin-top: -1px;
+                    position: fixed;
+                    width: 360px;
+                    height: 500px;
+                    background: linear-gradient(to bottom,gold 0%, silver 100%);
+                    list-style: none;
+                    border: 2px solid black;
+                    border-radius: 10%;
+                    box-shadow: white 6px 2px 6px;
+                    visibility: hidden;
+                }
+                #createAccount{
+                    margin-top: -204px;
+                    margin-left: -2px;
+                    position: fixed;
+                    width: 360px;
+                    height: 500px;
+                    background: linear-gradient(to bottom,gold 0%, silver 100%);
+                    list-style: none;
+                    border: 2px solid black;
+                    border-radius: 10%;
+                    box-shadow: white 6px 2px 6px;
+                    visibility: hidden;
+                }
+                form{
+                    margin-top: 50px;
+                    margin-bottom: 10px;
+                }
+                #options{
+                    margin-top: -1px;
+                    position: fixed;
+                    width: 360px;
+                    height: 500px;
+                    background: linear-gradient(to bottom,gold 0%, silver 100%);
+                    list-style: none;
+                    border: 2px solid black;
+                    border-radius: 10%;
+                    box-shadow: white 6px 2px 6px;
+                    visibility: hidden;
+
+                }
+                #optionsInput{
+                    margin-right: 20%;
+                    margin-top: 10%;
+                    display: inline;
+                }
+                #timer1{
+                    width: 100px;
+                    text-align: center;
+                    border-style: none;
+                    margin-left: 5%;
+                    margin-top: 2px;
+                    background: none;
+                    font-size: 1.5em;
+                    text-shadow: 3px 3px 3px black;
+                    color:red;
+                    font-family:"lucida Console";
+                    font-weight: bold;
+                }
+                #timerBox1{
+                    background: linear-gradient(to bottom,gold 0%, silver 100%);
+                    width: 90%;
+                    height: 30px;
+                    color: #339966;
+                    text-shadow: 1px 2px 1px black;
+                    box-shadow: black 8px 10px 8px;
+                    border-radius: 50%;
+                    margin-top: 30px;
+                    margin-left: 5px;
+                    padding: 10px;
+                }
+                #timerLabel1{
+                    margin-left: 30%;
+                    margin-top: -7%;
+                    font-size: 1em;
+                }
+                #timer{
+                    width: 100px;
+                    text-align: center;
+                    border-style: none;
+                    margin-left: 5%;
+                    margin-top: 2px;
+                    background: none;
+                    font-size: 1.5em;
+                    text-shadow: 3px 3px 3px black;
+                    color:red;
+                    font-family:"lucida Console";
+                    font-weight: bold;
+                }
+                #timerBox{
+                    background: linear-gradient(to bottom,gold 0%, silver 100%);
+                    width: 100%;
+                    height: 30px;
+                    color: #339966;
+                    text-shadow: 2px 3px 2px black;
+                    box-shadow: black 8px 10px 8px;
+                    border-radius: 50%;
+                    margin-bottom: 0;
+                    padding: 10px;
+                }
+                #timerLabel{
+                    margin-left: 25%;
+                    margin-top: -6.5%;
+                    font-size: 1.4em;
+                }
+                .timer{
+                    width: 100px;
+                    text-align: center;
+                    border-style: none;
+                    margin-top: 1%;
+                    margin-left: -5%;
+                    background: none;
+                    font-size: 1.5em;
+                    text-shadow: 3px 3px 3px black;
+                    color:red;
+                    font-family:"lucida Console";
+                    font-weight: bold;
+                }
+                .timerBox{
+                    background: linear-gradient(to bottom,gold 0%, silver 100%);
+                    width: 85%;
+                    height: 30px;
+                    color: #339966;
+                    text-shadow: 2px 3px 2px black;
+                    box-shadow: black 8px 10px 8px;
+                    border-radius: 50%;
+                    margin-bottom: 0;
+                    margin-left: 10%;
+                    padding-bottom: 10px;
+                    padding-top: 10px;
+                }
+                .timerLabel{
+                    margin-top: -8.5%;
+                    margin-left: 20%;
+                    font-size: 1.3em;
+                }
+                .dot {
+                    height: 10px;
+                    width: 10px;
+                    margin: 1px;
+                    background-color: black;
+                    border-radius: 50%;
+                    display: inline-block;
+                }
+                .dots{
+                    text-align: center;
+                    vertical-align: middle;
+                    width: 100%;
+                    border: 2px solid black;
+                    box-shadow: Black 10px -3px 8px;
+                    border-radius: 15%;
+                    background-color: lightYellow;
+                    margin: auto;
+                    padding-left: 2px;
+                    padding-right: 2px;
+                }
+                .td{
+                    padding-bottom: 7px;
+                    padding-left: 5px;
+                }
+                #again{
+                    background-color: #ffff99;
+                    text-align: center;
+                    position: fixed;
+                    width: 325px;
+                    height: 100px;
+                    padding-top: 25px;
+                    padding-bottom: 5px;
+                    padding-left: 15px;
+                    padding-right: 15px;
+                    margin-left: 5%;
+                    margin-top: 45%;
+                    font-size: 2em;
+                    border: 2px solid silver;
+                    border-radius: 40%;
+                    box-shadow: gold 3px 6px 3px;
+                    font-family:"lucida Console";
+                    text-shadow: gold 2px 3px 2px;
+                    visibility: hidden;
+                }
+                #again2{
+                    text-align: center;
+                    visibility: hidden;
+                }
+                .text{
+                    width: 200px;
+                    border-radius: 20%;
+                }
+                .save{
+                    width: 100px;
+                    border-radius: 20%;
+                    background-color: mediumSeaGreen;
+                    border: 2px solid black;
+                    box-shadow: 2px 3px 2px black;
+                }
+                #yes{	
+                    margin-left: -2%;
+                    font-family:"lucida Console";
+                    box-shadow: Black 6px 2px 6px;
+                    text-align: center;
+                    background-color:#53ff1a;
+                    width: 30%;
+                    border: 2px solid black;
+                    padding: 1%;
+                    border-radius: 20%;
+                    font-weight: bold;
+                    text-shadow: lightblue 2px 3px 2px;
+                    font-size: 0.7em;
+                }
+                #no{
+                    font-family:"lucida Console";
+                    box-shadow: Black 6px 2px 6px;
+                    text-align: center;
+                    background-color: red;
+                    width: 30%;
+                    border: 2px solid black;
+                    padding: 1%;
+                    border-radius: 20%;
+                    font-weight: bold;
+                    text-shadow: lightblue 2px 3px 2px;
+                    font-size: 0.7em;
+                }
+                #instructions{
+                    margin-left: 10px;
+                    margin-top: 50px;
+                    position: fixed;
+                    width:360px;
+                    height: 500px;
+                    background: linear-gradient(to bottom, #6600ff 0%, #5f9ea0 100%);
+                    font-size: 0.9em;
+                    list-style: none;
+                    text-align: center;
+                    border: 2px solid black;
+                    border-radius: 10%;
+                    box-shadow: white 6px 2px 6px;
+                    visibility : hidden;
+                }
+                .list{
+                    width: 100%;
+                }
+                .list2{
+                    width: 90%;
+                    margin-left: 13px;
+                    margin-top: 20px;
+                }
+                li{
+                    border: 2px solid mediumSeaGreen;
+                    color: lightSlateGrey;
+                    text-decoration: none;
+                    width: 90%;
+                    padding-bottom: 9px;
+                    padding-top: 8px;
+                    background: linear-gradient(to bottom,gold 0%, silver 100%);
+                    box-shadow: 3px 5px 3px white;
+                    border-radius: 20%;
+                    margin-bottom: 7px;
+                    list-style-type: none;
+                    margin-left:-7.5%;
+                }
+                .playerInfo{
+                    margin-bottom: 20px;
+                    width: 100%;
+                }
+                a{	
+                    padding: 2px;
+                    text-decoration: none;
+                    color: black;
+                    text-shadow: white 2px 3px 2px;
+                }
+                #closeme{
+                    font-family: "lucida Console", serif;
+                    font-weight: bold;
+                    width: 50%;
+                    padding: 1%;
+                    margin-left: -125px;;
+                    position: fixed;
+                    border: 2px solid black;
+                    text-align: center;
+                    background-color: mediumSeaGreen;
+                    color: black;
+                    border-radius: 30%;
+                    box-shadow: Black 6px 2px 6px;
+                    margin-top: 30px;
+                }
+                .catagories{
+                    text-align: center;
+                    width: 120px;
+                }
+                .players{
+                    color: silver;
+                    text-shadow: black 2px 3px 2px;
+
+                }
+                .player1LeftSideScoringContainer{
+                    float: left;
+                    width: 100%;
+                    display: inline;
+                    margin-right: 0%;
+                    margin-top: -4%;
+                    margin-left: 5%;
+                }
+                .score1{
+                    font-size: 1em;
+                    text-align: center;
+                    vertical-align: middle;
+                    border: 2px solid black;
+                    border-radius: 15%;
+                    margin-left: 5%;
+                }
+                .score{
+                    font-size: 1em;
+                    text-align: center;
+                    vertical-align: middle;
+                    border: 2px solid black;
+                    border-radius: 15%;
+                    margin-left: 5%;
+                }
+                .total1{
+                    font-size: 1em;
+                    text-align: center;
+                    vertical-align: middle;
+                    border: 4px solid black;
+                    background-color: lightgreen;
+                    margin-left: 5%;
+
+                }.total{
+                    font-size: 1em;
+                    text-align: center;
+                    vertical-align: middle;
+                    border: 4px solid black;
+                    background-color: lightgreen;
+                    margin-left: 5%;
+
+                }
+                #dice1{
+                    width: 100%;
+                    margin-left: 1%;
+                    margin-top: 3%;
+                }
+                .rollButton{
+                    font-family: "lucida Console", serif;
+                    font-size: 1em;
+                    font-weight: bold;
+                    border: 3px solid black;
+                    border-style: ridge;
+                    text-align: center;
+                    background-color: mediumSeaGreen;
+                    border-radius: 20%;
+                    color: black;
+                    margin-left: 3%;
+                    width: 65%;
+                    padding: 1.5%;
+                    margin-top: 1%;
+                    margin-bottom: 4%;
+                    box-shadow: Black 5px 2px 5px;
+                    float:left;
+                }
+                .saveButton{
+                    font-family: "lucida Console", serif;
+                    font-weight: 900;
+                    border: 3px solid black;
+                    border-style: ridge;
+                    text-align: center;
+                    background-color: lightYellow;
+                    color: black;
+                    margin-left: 71%;
+                    padding-top: 2%;
+                    padding-bottom: 2%;
+                    border-radius: 20%;
+                    width: 28%;
+                    float: left;
+                    margin-top: -13.5%;
+                    box-shadow: Black 5px 2px 5px;
+                    background-color: #ffff99;
+                }
+                .bothButtons{
+                    width:100%;
+                    display: inline;
+                }
+                h1{
+                    text-align: center;
+                    font-size: 1.6em;
+                    margin-bottom: 6px;
+                }
+                .p{
+                    margin-bottom: 5px;
+                    width: 300px;
+                }
+                p{	
+                    margin: auto;
+                    font-family: "lucida Console", serif;
+                    font-size: 1em;
+                    color: black;
+                }
+                .scrambleStyle{
+                    border-radius: 50%;
+                    background: linear-gradient(to bottom,gold 0%, silver 100%);
+                    box-shadow: 2px 3px 2px black;
+                    width: 100px;
+                    color: #339966;
+                    text-shadow: 1px 2px 1px black;
+                    padding-left: 13px;
+                    padding-right: 13px;
+                    text-align: center;
+                }
+
+                .switch {
+                    position: relative;
+                    display: inline-block;
+                    width: 45px;
+                    height: 20px;
+                    float: right;
+                    margin-right: 30%;
+                }
+
+                .switch input { 
+                    opacity: 0;
+                    width: 0;
+                    height: 0;
+                }
+
+                .slider {
+                    position: absolute;
+                    cursor: pointer;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background-color: #ccc;
+                    -webkit-transition: .4s;
+                    transition: .4s;
+                }
+
+                .slider:before {
+                    position: absolute;
+                    content: "";
+                    height: 14px;
+                    width: 14px;
+                    left: 3px;
+                    bottom: 3px;
+                    background-color: white;
+                    -webkit-transition: .4s;
+                    transition: .4s;
+                }
+                input:checked + .slider {
+                    background-color: mediumSeaGreen;
+                }
+                input:checked + .slider:before {
+                    -webkit-transform: translateX(26px);
+                    -ms-transform: translateX(26px);
+                    transform: translateX(26px);
+                }
+                /* Rounded sliders */
+                .slider.round {
+                    border-radius: 34px;
+
+                }
+
+                .slider.round:before {
+                    border-radius: 50%;
+                }	
+                .loginButton, .guestButton, .newAccountLinkButton{
+                    margin-left: 15px;
+                    margin-bottom: 10px;
+                    color: lightSlateGrey;
+                    text-decoration: none;
+                    width: 90%;
+                    border: 2px solid mediumSeaGreen;
+                    font-size: 1em;
+                    padding-bottom: 9px;
+                    padding-top: 8px;
+                    background: linear-gradient(to bottom,gold 0%, silver 100%);
+                    box-shadow: 3px 5px 3px white;
+                    border-radius: 20%;
+                }
+            }
+        </style>
+        <script>
+            var closeLevel = 0;
+            var diceSaved = [0, 0, 0, 0, 0];
+            var currentDice = [0, 0, 0, 0, 0];
+            var player1Score = [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "];
+            var player2Score = [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "];
+            var player1BlackOuts = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
+            var player2BlackOuts = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
+            var diceClicked = [false, false, false, false, false, false, false, false, false, false];
+            var newRound = true;
+            var blackOuts = 0;
+            var holdOver = 0;
+            var player1Top = 0;
+            var player2Top = 0;
+            var bonusAmount = 60;
+            var neededForBonus = 75;
+            var player1Turns = 4;
+            var player2Turns = 4;
+            var tempDraw = -1;
+            var heldValue1 = " ";
+            var heldValue2 = " ";
+            var playerNum = 1;
+            var rounds = 14;
+            var player1Total = 0;
+            var player2Total = 0;
+            var nameList = ["One's", "Two's", "Three's", "Four's", "Five's", "Six's", "Seven's", "Mini Run", "Broken Run", "Two Pair", "High Low", "Full House", "High Five", "Evens", "Odds", "3 of A Kind", "4 of a Kind", "Chance"];
+            var player1ScoreList = ["ones1", "twos1", "threes1", "fours1", "fives1", "sixes1", "sevens1", "miniRun1", "brokenRun1", "scramble1", "highLow1", "fullHouse1", "highFive1", "evens1", "odds1", "threeOfAKind1", "fourOfAKind1", "chance1"];
+            var player2ScoreList = ["ones2", "twos2", "threes2", "fours2", "fives2", "sixes2", "sevens2", "miniRun2", "brokenRun2", "scramble2", "highLow2", "fullHouse2", "highFive2", "evens2", "odds2", "threeOfAKind2", "fourOfAKind2", "chance2"];
+            var multiplier;
+            var multi = false;
+            var first = true;
+            var playerTurn = 1;
+            var player = 0;
+            var gameNumber = 1;
+            var load = false;
+            var seconds = 60;
+            var pause = 61;
+            var id;
+            var user = ["ScrmMstr1", "ScrmbQueen"];
+            var blackOutComplete = true;
+
+            /**
+             * Used to reset the dice value and display 5's
+             * Draws 9 dots but only displays the 5 for a 5
+             */
+            function clearDice() {
+                for (var diceNumber = 1; diceNumber < 6; diceNumber++) {
+                    var one = "one" + diceNumber;
+                    var node = document.getElementById(one);
+                    node.style.visibility = "visible";
+                    var two = "two" + diceNumber;
+                    var node2 = document.getElementById(two);
+                    node2.style.visibility = "hidden";
+                    var three = "three" + diceNumber;
+                    var node3 = document.getElementById(three);
+                    node3.style.visibility = "visible";
+                    var four = "four" + diceNumber;
+                    var node4 = document.getElementById(four);
+                    node4.style.visibility = "hidden";
+                    var five = "five" + diceNumber;
+                    var node5 = document.getElementById(five);
+                    node5.style.visibility = "visible";
+                    var six = "six" + diceNumber;
+                    var node6 = document.getElementById(six);
+                    node6.style.visibility = "hidden";
+                    var seven = "seven" + diceNumber;
+                    var node7 = document.getElementById(seven);
+                    node7.style.visibility = "visible";
+                    var eight = "eight" + diceNumber;
+                    var node8 = document.getElementById(eight);
+                    node8.style.visibility = "hidden";
+                    var nine = "nine" + diceNumber;
+                    var node9 = document.getElementById(nine);
+                    node9.style.visibility = "visible";
+                }
+            }
+
+            /**
+             * This function will draw at the specified dice's location
+             * @param {int} diceNumber Takes in the diceNumber to draw at
+             */
+            function drawOne(diceNumber) {
+                var one = "one" + diceNumber;
+                var node = document.getElementById(one);
+                node.style.visibility = "hidden";
+                var two = "two" + diceNumber;
+                var node2 = document.getElementById(two);
+                node2.style.visibility = "hidden";
+                var three = "three" + diceNumber;
+                var node3 = document.getElementById(three);
+                node3.style.visibility = "hidden";
+                var four = "four" + diceNumber;
+                var node4 = document.getElementById(four);
+                node4.style.visibility = "hidden";
+                var five = "five" + diceNumber;
+                var node5 = document.getElementById(five);
+                node5.style.visibility = "visible";
+                var six = "six" + diceNumber;
+                var node6 = document.getElementById(six);
+                node6.style.visibility = "hidden";
+                var seven = "seven" + diceNumber;
+                var node7 = document.getElementById(seven);
+                node7.style.visibility = "hidden";
+                var eight = "eight" + diceNumber;
+                var node8 = document.getElementById(eight);
+                node8.style.visibility = "hidden";
+                var nine = "nine" + diceNumber;
+                var node9 = document.getElementById(nine);
+                node9.style.visibility = "hidden";
+            }
+            /**
+             * Draws a 2 at the specified dice location
+             * @param {int} diceNumber
+             */
+            function drawTwo(diceNumber) {
+                var one = "one" + diceNumber;
+                var node = document.getElementById(one);
+                node.style.visibility = "visible";
+                var two = "two" + diceNumber;
+                var node2 = document.getElementById(two);
+                node2.style.visibility = "hidden";
+                var three = "three" + diceNumber;
+                var node3 = document.getElementById(three);
+                node3.style.visibility = "hidden";
+                var four = "four" + diceNumber;
+                var node4 = document.getElementById(four);
+                node4.style.visibility = "hidden";
+                var five = "five" + diceNumber;
+                var node5 = document.getElementById(five);
+                node5.style.visibility = "hidden";
+                var six = "six" + diceNumber;
+                var node6 = document.getElementById(six);
+                node6.style.visibility = "hidden";
+                var seven = "seven" + diceNumber;
+                var node7 = document.getElementById(seven);
+                node7.style.visibility = "hidden";
+                var eight = "eight" + diceNumber;
+                var node8 = document.getElementById(eight);
+                node8.style.visibility = "hidden";
+                var nine = "nine" + diceNumber;
+                var node9 = document.getElementById(nine);
+                node9.style.visibility = "visible";
+            }
+
+            /**
+             * Draws a 3 at the specified dice location
+             * @param {int} diceNumber
+             */
+            function drawThree(diceNumber) {
+                var one = "one" + diceNumber;
+                var node = document.getElementById(one);
+                node.style.visibility = "visible";
+                var two = "two" + diceNumber;
+                var node2 = document.getElementById(two);
+                node2.style.visibility = "hidden";
+                var three = "three" + diceNumber;
+                var node3 = document.getElementById(three);
+                node3.style.visibility = "hidden";
+                var four = "four" + diceNumber;
+                var node4 = document.getElementById(four);
+                node4.style.visibility = "hidden";
+                var five = "five" + diceNumber;
+                var node5 = document.getElementById(five);
+                node5.style.visibility = "visible";
+                var six = "six" + diceNumber;
+                var node6 = document.getElementById(six);
+                node6.style.visibility = "hidden";
+                var seven = "seven" + diceNumber;
+                var node7 = document.getElementById(seven);
+                node7.style.visibility = "hidden";
+                var eight = "eight" + diceNumber;
+                var node8 = document.getElementById(eight);
+                node8.style.visibility = "hidden";
+                var nine = "nine" + diceNumber;
+                var node9 = document.getElementById(nine);
+                node9.style.visibility = "visible";
+            }
+
+            /**
+             * Draws a 4 at the specified dice location
+             * @param {int} diceNumber
+             */
+            function drawFour(diceNumber) {
+                var one = "one" + diceNumber;
+                var node = document.getElementById(one);
+                node.style.visibility = "visible";
+                var two = "two" + diceNumber;
+                var node2 = document.getElementById(two);
+                node2.style.visibility = "hidden";
+                var three = "three" + diceNumber;
+                var node3 = document.getElementById(three);
+                node3.style.visibility = "visible";
+                var four = "four" + diceNumber;
+                var node4 = document.getElementById(four);
+                node4.style.visibility = "hidden";
+                var five = "five" + diceNumber;
+                var node5 = document.getElementById(five);
+                node5.style.visibility = "hidden";
+                var six = "six" + diceNumber;
+                var node6 = document.getElementById(six);
+                node6.style.visibility = "hidden";
+                var seven = "seven" + diceNumber;
+                var node7 = document.getElementById(seven);
+                node7.style.visibility = "visible";
+                var eight = "eight" + diceNumber;
+                var node8 = document.getElementById(eight);
+                node8.style.visibility = "hidden";
+                var nine = "nine" + diceNumber;
+                var node9 = document.getElementById(nine);
+                node9.style.visibility = "visible";
+            }
+            /**
+             * Draws a 5 at the specified dice location
+             * @param {int} diceNumber
+             */
+            function drawFive(diceNumber) {
+                var one = "one" + diceNumber;
+                var node = document.getElementById(one);
+                node.style.visibility = "visible";
+                var two = "two" + diceNumber;
+                var node2 = document.getElementById(two);
+                node2.style.visibility = "hidden";
+                var three = "three" + diceNumber;
+                var node3 = document.getElementById(three);
+                node3.style.visibility = "visible";
+                var four = "four" + diceNumber;
+                var node4 = document.getElementById(four);
+                node4.style.visibility = "hidden";
+                var five = "five" + diceNumber;
+                var node5 = document.getElementById(five);
+                node5.style.visibility = "visible";
+                var six = "six" + diceNumber;
+                var node6 = document.getElementById(six);
+                node6.style.visibility = "hidden";
+                var seven = "seven" + diceNumber;
+                var node7 = document.getElementById(seven);
+                node7.style.visibility = "visible";
+                var eight = "eight" + diceNumber;
+                var node8 = document.getElementById(eight);
+                node8.style.visibility = "hidden";
+                var nine = "nine" + diceNumber;
+                var node9 = document.getElementById(nine);
+                node9.style.visibility = "visible";
+            }
+            /**
+             * Draws a 6 at the specified dice location
+             * @param {int} diceNumber
+             */
+            function drawSix(diceNumber) {
+                var one = "one" + diceNumber;
+                var node = document.getElementById(one);
+                node.style.visibility = "visible";
+                var two = "two" + diceNumber;
+                var node2 = document.getElementById(two);
+                node2.style.visibility = "hidden";
+                var three = "three" + diceNumber;
+                var node3 = document.getElementById(three);
+                node3.style.visibility = "visible";
+                var four = "four" + diceNumber;
+                var node4 = document.getElementById(four);
+                node4.style.visibility = "visible";
+                var five = "five" + diceNumber;
+                var node5 = document.getElementById(five);
+                node5.style.visibility = "hidden";
+                var six = "six" + diceNumber;
+                var node6 = document.getElementById(six);
+                node6.style.visibility = "visible";
+                var seven = "seven" + diceNumber;
+                var node7 = document.getElementById(seven);
+                node7.style.visibility = "visible";
+                var eight = "eight" + diceNumber;
+                var node8 = document.getElementById(eight);
+                node8.style.visibility = "hidden";
+                var nine = "nine" + diceNumber;
+                var node9 = document.getElementById(nine);
+                node9.style.visibility = "visible";
+            }
+            /**
+             * Draws a 7 at the specified dice location
+             * @param {int} diceNumber
+             */
+            function drawSeven(diceNumber) {
+                var one = "one" + diceNumber;
+                var node = document.getElementById(one);
+                node.style.visibility = "visible";
+                var two = "two" + diceNumber;
+                var node2 = document.getElementById(two);
+                node2.style.visibility = "hidden";
+                var three = "three" + diceNumber;
+                var node3 = document.getElementById(three);
+                node3.style.visibility = "visible";
+                var four = "four" + diceNumber;
+                var node4 = document.getElementById(four);
+                node4.style.visibility = "visible";
+                var five = "five" + diceNumber;
+                var node5 = document.getElementById(five);
+                node5.style.visibility = "visible";
+                var six = "six" + diceNumber;
+                var node6 = document.getElementById(six);
+                node6.style.visibility = "visible";
+                var seven = "seven" + diceNumber;
+                var node7 = document.getElementById(seven);
+                node7.style.visibility = "visible";
+                var eight = "eight" + diceNumber;
+                var node8 = document.getElementById(eight);
+                node8.style.visibility = "hidden";
+                var nine = "nine" + diceNumber;
+                var node9 = document.getElementById(nine);
+                node9.style.visibility = "visible";
+            }
+
+            function startTimer(seconds) {
+                $("#timer").html(seconds);
+                if (seconds == 0) {
+                    if (rounds + blackOuts < 14 && blackOutComplete === true) {
+                        blackOut();
+                    } else {
+                        clearInterval(timer);
+                    }
+                    return;
+                } else if ((seconds + 1) % 14 === 0) {
+                    startScramble();
+                }
+                seconds = seconds - 1;
+                id = setTimeout(function () {
+                    startTimer(seconds)
+                }, 1000);
+            }
+
+            function pauseTimer() {
+                pause = parseInt($("#timer").html());
+                clearTimeout(id);
+            }
+
+            function resumeTimer() {
+                startTimer(pause);
+            }
+
+            function blackOut() {
+                var numberOfTimes = 1;
+                totalFlips = 13;
+                last1 = -1;
+                last2 = -1;
+                placed = false;
+                blackOutComplete = false;
+                $(".rollButton").val("New BlackOut Begins");
+
+                // Searches for a empty spot with i for Player 1 and j for Player 2
+                // Each number 2- 15 coresponds with the position of a score box
+
+                var i = Math.floor(Math.random() * 15 + 2);
+                var j = Math.floor(Math.random() * 15 + 2);
+                function f() {
+                    if (placed) {
+                        $('#' + player1ScoreList[last1]).css("background-color", "white").val(" ");
+                        $('#' + player2ScoreList[last2]).css("background-color", "white").val(" ");
+                        if (last1 === tempDraw && playerNum === 1) {
+                            $('#' + player1ScoreList[last1]).css("background-color", "white").val(heldValue1);
+                        } else if (last2 === tempDraw && playerNum === 2) {
+                            $('#' + player2ScoreList[last2]).css("background-color", "white").val(heldValue2);
+                        }
+                    }
+                    if (player1Score[i] === " " && player2Score[j] === " " && numberOfTimes < 13) {
+                        heldValue1 = $('#' + player1ScoreList[i]).val();
+                        heldValue2 = $('#' + player2ScoreList[j]).val();
+                        if (numberOfTimes + 1 === totalFlips - 1) {
+                            blackOuts++;
+                        }
+                        if (playerNum === 1 && (numberOfTimes + 1 === totalFlips - 1) && tempDraw === i) {
+                            tempDraw = -1;
+                        } else if (playerNum === 2 && (numberOfTimes + 1 === totalFlips - 1) && tempDraw === j) {
+                            tempDraw = -1;
+                        }
+                        $('#' + player1ScoreList[i]).css("background-color", "gold").val("X");
+                        $('#' + player2ScoreList[j]).css("background-color", "gold").val("X");
+                        numberOfTimes++;
+                        if (numberOfTimes > 3) {
+                            totalFlips--;
+                        }
+                        placed = true;
+                        last1 = i;
+                        last2 = j;
+                    } else {
+                        placed = false;
+                        last1 = -1;
+                        last2 = -1;
+                    }
+                    if (numberOfTimes < totalFlips) {
+                        setTimeout(f, 150);
+                    } else {
+                        if (player === playerNum || !multi) {
+                            $('#' + player1ScoreList[i]).css("background-color", "gold").val("X");
+                            $('#' + player2ScoreList[j]).css("background-color", "gold").val("X");
+                            player1Score[i] = 0;
+                            player2Score[j] = 0;
+                            blackOutComplete = true;
+//							if (rounds === 0 && blackOuts > 2){
+//								holdOver = 1;
+//							}
+                            $(".rollButton").val("Complete");
+                            if (newRound === false) {
+                                startTimer(60);
+                            } else {
+                                clearInterval(timer);
+                            }
+                            return;
+                        }
+                        i = 2;
+                        j = 2;
+                    }
+                    i = Math.floor(Math.random() * 15 + 2);
+                    j = Math.floor(Math.random() * 15 + 2);
+                }
+                f();
+            }
+
+            function multiPlayerBlackOut() {
+                var numberOfTimes = 1;
+                totalFlips = 13;
+                last1 = -1;
+                last2 = -1;
+                placed = false;
+
+                // Searches for a empty spot with i for Player 1 and j for Player 2
+                // Each number 2- 15 coresponds with the position of a score box
+
+                var i = Math.floor(Math.random() * 15 + 2);
+                var j = Math.floor(Math.random() * 15 + 2);
+                function f() {
+                    if (placed) {
+                        $('#' + player1ScoreList[last1]).css("background-color", "white").val(" ");
+                        $('#' + player2ScoreList[last2]).css("background-color", "white").val(" ");
+                        if (last1 === tempDraw && playerNum === 1) {
+                            $('#' + player1ScoreList[last1]).css("background-color", "white").val(heldValue1);
+                        } else if (last2 === tempDraw && playerNum === 2) {
+                            $('#' + player2ScoreList[last2]).css("background-color", "white").val(heldValue2);
+                        }
+                    }
+                    if (player1Score[i] === " " && player2Score[j] === " " && numberOfTimes < 13) {
+                        if (player === 1) {
+                            heldValue1 = $('#' + player1ScoreList[i]).val();
+
+                        } else if (player === 2) {
+                            heldValue2 = $('#' + player2ScoreList[j]).val();
+
+                        }
+                        if (numberOfTimes + 1 === totalFlips - 1) {
+                            blackOuts++;
+                        }
+                        if (playerNum === 1 && (numberOfTimes + 1 === totalFlips - 1) && tempDraw === i) {
+                            tempDraw = -1;
+                            player1BlackOuts[i] = true;
+                        } else if (playerNum === 2 && (numberOfTimes + 1 === totalFlips - 1) && tempDraw === j) {
+                            tempDraw = -1;
+                            player2BlackOuts[j] = true;
+                        }
+                        $('#' + player1ScoreList[i]).css("background-color", "gold").val("X");
+                        $('#' + player2ScoreList[j]).css("background-color", "gold").val("X");
+                        numberOfTimes++;
+                        if (numberOfTimes > 3) {
+                            totalFlips--;
+                        }
+                        placed = true;
+                        last1 = i;
+                        last2 = j;
+                    } else {
+                        placed = false;
+                        last1 = -1;
+                        last2 = -1;
+                    }
+                    if (numberOfTimes < totalFlips) {
+                        setTimeout(f, 150);
+                    } else {
+
+                        player1Score[i] = 0;
+                        player2Score[j] = 0;
+                        i = 2;
+                        j = 2;
+                    }
+                    i = Math.floor(Math.random() * 15 + 2);
+                    j = Math.floor(Math.random() * 15 + 2);
+                }
+                f();
+            }
+
+            function startScramble() {
+                var i = Math.floor(Math.random() * 7);
+                var j = Math.floor(Math.random() * 7);
+                $('#nameScramble1').html(nameList[i]).val(i);
+                if (i === 0) {
+                    $('#nameScramble1').append(" x8");
+                } else if (i === 1) {
+                    $('#nameScramble1').append(" x5");
+                }
+                $('#nameScramble2').html(nameList[j]).val(j);
+                if (j === 0) {
+                    $('#nameScramble2').append(" x8");
+                } else if (j === 1) {
+                    $('#nameScramble2').append(" x5");
+                }
+            }
+
+
+            /**
+             *  Randomly picks a number between 1 and 7 and draws the appropriate dice
+             *  in the correct spot and assigns the specific dice an value of selected and 
+             *
+             * @param {int} diceNumber takes in which dice to draw
+             */
+            function drawDice(diceNumber) {
+                var newVal = Math.floor(Math.random() * 7) + 1;
+                var selected = -1;
+                switch (newVal) {
+                    case 1:
+                        drawOne(diceNumber);
+                        selected = 1;
+                        break;
+                    case 2:
+                        drawTwo(diceNumber);
+                        selected = 2;
+                        break;
+                    case 3:
+                        drawThree(diceNumber);
+                        selected = 3;
+                        break;
+                    case 4:
+                        drawFour(diceNumber);
+                        selected = 4;
+                        break;
+                    case 5:
+                        drawFive(diceNumber);
+                        selected = 5;
+                        break;
+                    case 6:
+                        drawSix(diceNumber);
+                        selected = 6;
+                        break;
+                    case 7:
+                        drawSeven(diceNumber);
+                        selected = 7;
+                        break;
+                }
+                currentDice[(diceNumber - 1) % 5 ] = selected;
+            }
+
+            function loadBoard() {
+                load = true;
+                processForm();
+                if (player === playerNum) {
+                    $("#player2Dice1").css("backgroundColor", "lightYellow");
+                    $("#player2Dice2").css("backgroundColor", "lightYellow");
+                    $("#player2Dice3").css("backgroundColor", "lightYellow");
+                    $("#player2Dice4").css("backgroundColor", "lightYellow");
+                    $("#player2Dice5").css("backgroundColor", "lightYellow");
+                    $(".rollButton").val(user[1] + ", your up!").css("background-color", "gold");
+                }
+            }
+            /**
+             * Reduces the player's turns, displays it
+             * and rolls any unclicked dice for that player if they still have turns available
+             */
+            function rollDice() {
+                if (player1Turns === 4 && player2Turns === 4 && multi && !newRound) {
+                    processForm();
+                }
+                if (multi && (rounds + blackOuts >= 15) && !newRound) {
+                    pauseTimer();
+                    showWinner();
+                    newRound = true;
+                    clearInterval(timer);
+                    resetDice();
+                } else {
+                    if ((player === playerNum) || !multi) {
+                        if (newRound) {
+                            blackOuts = holdOver;
+                            holdOver = 0;
+                            rounds = 0;
+                            startTimer(60);
+                            newRound = false;
+                        }
+                        first = false;
+                        if (playerNum === 1 && player1Turns > 0) {
+                            player1Turns -= 1;
+                            $('.rollButton').val(user[0] + ": " + player1Turns + " rolls").css("background-color", "#53ff1a");
+                            for (var i = 0; i < 5; i++) {
+                                if (diceSaved[i] === 0)
+                                {
+                                    drawDice(i + 1);
+                                }
+                            }
+                        } else if (playerNum === 2 && player2Turns > 0) {
+                            player2Turns -= 1;
+                            $('.rollButton').val(user[1] + ": " + player2Turns + " rolls").css("background-color", "gold");
+                            for (var i = 0; i < 5; i++) {
+                                if (diceSaved[i] === 0)
+                                {
+                                    drawDice(i + 1);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            /**
+             * When a dice is clicked it stores the value and changes the dice color to green
+             * If the dice is already clicked, then the fuction returns the dice to yellow and 
+             * allows it to be clicked again.
+             * @param {int} diceNumber takes in which dice number has been choosen
+             */
+            function hold(diceNumber) {
+                if ((playerNum === 1 && player1Turns < 4) || (playerNum === 2 && player2Turns < 4))
+                {
+                    switch (diceNumber) {
+                        case 1:
+                            if (diceClicked[diceNumber - 1] === false) {
+                                document.getElementById("player1Dice1").style.backgroundColor = "lightGreen";
+                                diceSaved[0] = currentDice[0];
+                                diceClicked[diceNumber - 1] = true;
+                            } else {
+                                document.getElementById("player1Dice1").style.backgroundColor = "lightYellow";
+                                diceSaved[0] = 0;
+                                diceClicked[diceNumber - 1] = false;
+                            }
+                            break;
+                        case 2:
+                            if (diceClicked[diceNumber - 1] === false) {
+                                document.getElementById("player1Dice2").style.backgroundColor = "lightGreen";
+                                diceSaved[1] = currentDice[1];
+                                diceClicked[diceNumber - 1] = true;
+                            } else {
+                                document.getElementById("player1Dice2").style.backgroundColor = "lightYellow";
+                                diceSaved[1] = 0;
+                                diceClicked[diceNumber - 1] = false;
+                            }
+                            break;
+                        case 3:
+                            if (diceClicked[diceNumber - 1] === false) {
+                                document.getElementById("player1Dice3").style.backgroundColor = "lightGreen";
+                                diceSaved[2] = currentDice[2];
+                                diceClicked[diceNumber - 1] = true;
+                            } else {
+                                document.getElementById("player1Dice3").style.backgroundColor = "lightYellow";
+                                diceSaved[2] = 0;
+                                diceClicked[diceNumber - 1] = false;
+                            }
+                            break;
+                        case 4:
+                            if (diceClicked[diceNumber - 1] === false) {
+                                document.getElementById("player1Dice4").style.backgroundColor = "lightGreen";
+                                diceSaved[3] = currentDice[3];
+                                diceClicked[diceNumber - 1] = true;
+                            } else {
+                                document.getElementById("player1Dice4").style.backgroundColor = "lightYellow";
+                                diceSaved[3] = 0;
+                                diceClicked[diceNumber - 1] = false;
+                            }
+                            break;
+                        case 5:
+                            if (diceClicked[diceNumber - 1] === false) {
+                                document.getElementById("player1Dice5").style.backgroundColor = "lightGreen";
+                                diceSaved[4] = currentDice[4];
+                                diceClicked[diceNumber - 1] = true;
+                            } else {
+                                document.getElementById("player1Dice5").style.backgroundColor = "lightYellow";
+                                diceSaved[4] = 0;
+                                diceClicked[diceNumber - 1] = false;
+                            }
+                            break;
+                    }
+                }
+            }
+
+            /**
+             * Resets the box scores and the player totals for both players
+             * Resets the player message boxes and clears all the dice
+             */
+            function clearScores() {
+                for (var i = 2; i < 17; i++) {
+                    $('#' + player1ScoreList[i]).css("background-color", "white").val(" ");
+                    $('#' + player2ScoreList[i]).css("background-color", "white").val(" ");
+                    player1Score[i] = " ";
+                    player2Score[i] = " ";
+                }
+                player1Top = 0;
+                player2Top = 0;
+                $('#bonus1').val(" ");
+                $('#bonus2').val(" ");
+                player1Total = 0;
+                player2Total = 0;
+                clearDice();
+                $("#total1").val(" ");
+                $("#total2").val(" ");
+                $("#again").css('visibility', "hidden");
+                $("#again2").css('visibility', "hidden");
+                newRound = true;
+                $("#singlePlayer").show().delay(300);
+//                $(".rollButton").val("Player 1: your up!").css("background-color", "#53ff1a");
+            }
+
+            /**
+             * Clears the last box selected that hasn't been confirmed
+             * ie if fours were clicked but then chance was clicked the 4 box would be deleted
+             * @param {int} playerNum takes in the current player
+             */
+            function clearLast(playerNum) {
+                if (tempDraw !== -1) {
+                    if (playerNum === 1) {
+                        $('#' + player1ScoreList[tempDraw]).val(" ");
+                    } else if (playerNum === 2) {
+                        $('#' + player2ScoreList[tempDraw]).val(" ");
+                    }
+                }
+            }
+
+            function resetDice() {
+                tempDraw = -1;
+                diceSaved = [0, 0, 0, 0, 0];
+                currentDice = [0, 0, 0, 0, 0];
+                diceClicked = [false, false, false, false, false, false, false, false, false, false];
+                clearDice();
+                heldValue1 = " ";
+                heldValue2 = " ";
+            }
+            /**
+             * Saves the score of the specific player after they have clicked save score
+             * Updates their score their score categories then resets the board and changes 
+             * the player to the opposite one. Displays a message for each player as well
+             */
+            function saveScore() {
+                var total = 0;
+                i = 2;
+                if (player === playerNum || !multi) {
+                    if (tempDraw != -1) {
+                        for (i = 2; i < 17; i++) {
+                            if (playerNum === 1) {
+                                player1Score[tempDraw] = $('#' + player1ScoreList[tempDraw]).val();
+                                if ($('#' + player1ScoreList[i]).val() !== " ")
+                                {
+                                    if ($('#' + player1ScoreList[i]).val() !== "X") {
+                                        total += parseInt($('#' + player1ScoreList[i]).val());
+                                        if (i < 7) {
+                                            player1Top = total;
+                                            if (parseInt($('#' + player1ScoreList[i]).val()) > 74) {
+                                                player1Top -= 75;
+                                            }
+                                        }
+                                    }
+                                }
+                                player1Turns = 4;
+                                $(".rollButton").val(user[1] + ", your up!").css("background-color", "gold");
+
+                            } else if (playerNum === 2) {
+                                player2Score[tempDraw] = $('#' + player2ScoreList[tempDraw]).val();
+                                if ($('#' + player2ScoreList[i]).val() !== " ")
+                                {
+                                    if ($('#' + player2ScoreList[i]).val() !== "X") {
+                                        total += parseInt($('#' + player2ScoreList[i]).val());
+                                        if (i < 7) {
+                                            player2Top = total;
+                                            if (parseInt($('#' + player2ScoreList[i]).val()) > 74) {
+                                                player2Top -= 75;
+                                            }
+                                        }
+                                    }
+                                }
+                                player2Turns = 4;
+                                $(".rollButton").val(user[0] + ", your up!").css("background-color", "#53ff1a");
+                            }
+                        }
+                        resetDice();
+                        if (playerNum === 1) {
+                            if (player1Top >= neededForBonus) {
+                                $("#bonus1").val(bonusAmount);
+                                total += bonusAmount;
+                            }
+                            playerNum = 2;
+                            $("#total1").val(total);
+                            $("#player1Dice1").css("backgroundColor", "lightYellow");
+                            $("#player1Dice2").css("backgroundColor", "lightYellow");
+                            $("#player1Dice3").css("backgroundColor", "lightYellow");
+                            $("#player1Dice4").css("backgroundColor", "lightYellow");
+                            $("#player1Dice5").css("backgroundColor", "lightYellow");
+                            player1Total = total;
+                        } else if (playerNum === 2) {
+                            if (player2Top >= neededForBonus) {
+                                $("#bonus2").val(bonusAmount);
+                                total += bonusAmount;
+                            }
+                            playerNum = 1;
+                            $("#total2").val(total);
+                            $("#player1Dice1").css("backgroundColor", "lightYellow");
+                            $("#player1Dice2").css("backgroundColor", "lightYellow");
+                            $("#player1Dice3").css("backgroundColor", "lightYellow");
+                            $("#player1Dice4").css("backgroundColor", "lightYellow");
+                            $("#player1Dice5").css("backgroundColor", "lightYellow");
+                            rounds += 1;
+                            player2Total = total;
+                        }
+                        if (multi) {
+                            pauseTimer();
+                            $("#saveForm").submit();
+                            if (!newRound) {
+                                loadBoard();
+                            }
+                        }
+                    }
+                }
+                if (rounds + blackOuts >= 15) {
+                    pauseTimer();
+                    if (!multi) {
+                        newRound = true;
+                    } else {
+                        $("#saveForm").submit();
+                    }
+                    showWinner();
+                    clearInterval(timer);
+                    resetDice();
+                }
+            }
+            /**
+             * Displays a message for the winner and the loser
+             * Changes the color of their specific message box
+             */
+            function showWinner() {
+                if (player1Total > player2Total) {
+                    $(".rollButton").val(user[0] + " wins!!").css("background-color", "#53ff1a");
+                    $(".rollButton").css("background-color", "lightGreen");
+                    $("#winner").html(user[0]);
+                } else if (player2Total > player1Total) {
+                    $(".rollButton").val(user[1] + " wins!!").css("background-color", "#53ff1a");
+                    $("#winner").html(user[1]);
+                } else {
+                    $(".rollButton").val("It's a tie!").css("background-color", "purple");
+                    $("#winner").html("It's a tie!");
+                }
+
+                $("#again").css("visibility", "visible");
+                $("#again2").hide();
+                $("#winners").fadeIn();
+                $("#winners").delay(2500).fadeOut();
+                $("#again2").delay(4000).fadeIn().css("visibility", "visible");
+            }
+            /**
+             * Checks if the spot is available if so adds all the ones on all the dice
+             * if there is none then a 0 is given
+             * @param {int} playerNum the current player  number
+             */
+            function scoreOnes(playerClicked, checkScramble) {
+                clearLast(playerNum, tempDraw);
+                var index = 0;
+                var total = 0;
+                if (checkScramble) {
+                    index = 9;
+                }
+                if (playerNum === 1 && playerClicked === 1) {
+                    if (player1Score[index] === " ") {
+                        total = getTotal(1);
+                        if (checkScramble) {
+                            total = total * 8;
+                            $('#scramble1').val(total);
+                        } else {
+                            $('#ones1').val(total);
+                        }
+                        tempDraw = index;
+                    }
+                } else if (playerNum === 2 && playerClicked === 2) {
+                    if (player2Score[index] === " ") {
+                        total = getTotal(1);
+                        if (checkScramble) {
+                            total = total * 8;
+                            $('#scramble2').val(total);
+                        } else {
+                            $('#ones2').val(total);
+                        }
+                        tempDraw = index;
+                    }
+                }
+            }
+
+            /**
+             * Checks if the spot is available if so adds all the twos on all the dice
+             * if there is none then a 0 is given
+             * @param {int} playerNum the current player  number
+             */
+            function scoreTwos(playerClicked, checkScramble) {
+                clearLast(playerNum, tempDraw);
+                var index = 1;
+                var total = 0;
+                if (checkScramble) {
+                    index = 9;
+                }
+                if (playerNum === 1 && playerClicked === 1) {
+                    if (player1Score[index] === " ") {
+                        total = getTotal(2);
+                        if (checkScramble) {
+                            total = total * 5;
+                            $('#scramble1').val(total);
+                        } else {
+                            $('#twos2').val(total);
+                        }
+                        tempDraw = index;
+                    }
+                } else if (playerNum === 2 && playerClicked === 2) {
+                    if (player2Score[index] === " ") {
+                        total = getTotal(2);
+                        if (checkScramble) {
+                            total = total * 5;
+                            $('#scramble2').val(total);
+                        } else {
+                            $('#twos2').val(total);
+                        }
+                        tempDraw = index;
+                    }
+                }
+            }
+            /**
+             * Checks if the spot is available if so adds all the threes on all the dice
+             * if there is none then a 0 is given
+             * @param {int} playerNum the current player  number
+             */
+            function scoreThrees(playerClicked, checkScramble) {
+                clearLast(playerNum, tempDraw);
+                var index = 2;
+                var total = 0;
+                if (checkScramble) {
+                    index = 9;
+                }
+                if (playerNum === 1 && playerClicked === 1) {
+                    if (player1Score[index] === " ") {
+                        total = getTotal(3);
+                        if (checkScramble) {
+                            $('#scramble1').val(total);
+                        } else {
+                            $('#threes1').val(total);
+                        }
+                        tempDraw = index;
+                    }
+                } else if (playerNum === 2 && playerClicked === 2) {
+                    if (player2Score[index] === " ") {
+                        total = getTotal(3);
+                        if (checkScramble) {
+                            $('#scramble2').val(total);
+                        } else {
+                            $('#threes2').val(total);
+                        }
+                        tempDraw = index;
+                    }
+                }
+            }
+            /**
+             * Checks if the spot is available if so adds all the fourss on all the dice
+             * if there is none then a 0 is given
+             * @param {int} playerNum the current player  number
+             */
+            function scoreFours(playerClicked, checkScramble) {
+                clearLast(playerNum, tempDraw);
+                var index = 3;
+                var total = 0;
+                if (checkScramble) {
+                    index = 9;
+                }
+                if (playerNum === 1 && playerClicked === 1) {
+                    if (player1Score[index] === " ") {
+                        total = getTotal(4);
+                        if (checkScramble) {
+                            $('#scramble1').val(total);
+                        } else {
+                            $('#fours1').val(total);
+                        }
+                        tempDraw = index;
+                    }
+                } else if (playerNum === 2 && playerClicked === 2) {
+                    if (player2Score[index] === " ") {
+                        total = getTotal(4);
+                        if (checkScramble) {
+                            $('#scramble2').val(total);
+                        } else {
+                            $('#fours2').val(total);
+                        }
+                        tempDraw = index;
+                    }
+                }
+            }
+            /**
+             * Checks if the spot is available if so adds all the fives on all the dice
+             * if there is none then a 0 is given
+             * @param {int} playerNum the current player  number
+             */
+            function scoreFives(playerClicked, checkScramble) {
+                clearLast(playerNum, tempDraw);
+                var index = 4;
+                var total = 0;
+                if (checkScramble) {
+                    index = 9;
+                }
+                if (playerNum === 1 && playerClicked === 1) {
+                    if (player1Score[index] === " ") {
+                        total = getTotal(5);
+                        if (checkScramble) {
+                            $('#scramble1').val(total);
+                        } else {
+                            $('#fives1').val(total);
+                        }
+                        tempDraw = index;
+                    }
+                } else if (playerNum === 2 && playerClicked === 2) {
+                    if (player2Score[index] === " ") {
+                        total = getTotal(5);
+                        if (checkScramble) {
+                            $('#scramble2').val(total);
+                        } else {
+                            $('#fives2').val(total);
+                        }
+                        tempDraw = index;
+                    }
+                }
+            }
+            /**
+             * Checks if the spot is available if so adds all the sixes on all the dice
+             * if there is none then a 0 is given
+             * @param {int} playerNum the current player  number
+             */
+            function scoreSixes(playerClicked, checkScramble) {
+                clearLast(playerNum, tempDraw);
+                var index = 5;
+                var total = 0;
+                if (checkScramble) {
+                    index = 9;
+                }
+                if (playerNum === 1 && playerClicked === 1) {
+                    if (player1Score[index] === " ") {
+                        total = getTotal(6);
+                        if (checkScramble) {
+                            $('#scramble1').val(total);
+                        } else {
+                            $('#sixes1').val(total);
+                        }
+                        tempDraw = index;
+                    }
+                } else if (playerNum === 2 && playerClicked === 2) {
+                    if (player2Score[index] === " ") {
+                        total = getTotal(6);
+                        if (checkScramble) {
+                            $('#scramble2').val(total);
+                        } else {
+                            $('#sixes2').val(total);
+                        }
+                        tempDraw = index;
+                    }
+                }
+            }
+
+            /**
+             * Checks if the spot is available if so adds all the sevens on all the dice
+             * if there is none then a 0 is given
+             * @param {int} playerNum the current player  number
+             */
+            function scoreSevens(playerClicked, checkScramble) {
+                clearLast(playerNum, tempDraw);
+                var index = 6;
+                var total = 0;
+                if (checkScramble) {
+                    index = 9;
+                }
+                if (playerNum === 1 && playerClicked === 1) {
+                    if (player1Score[index] === " ") {
+                        total = getTotal(7);
+                        if (checkScramble) {
+                            $('#scramble1').val(total);
+                        } else {
+                            $('#sevens1').val(total);
+                        }
+                        tempDraw = index;
+                    }
+                } else if (playerNum === 2 && playerClicked === 2) {
+                    if (player2Score[index] === " ") {
+                        total = getTotal(7);
+                        if (checkScramble) {
+                            $('#scramble2').val(total);
+                        } else {
+                            $('#sevens2').val(total);
+                        }
+                        tempDraw = index;
+                    }
+                }
+            }
+
+            /**
+             * First checks if the spot is empty and then checks the dice 
+             * to see if a player has rolled a miniRun
+             * if a miniRun is found then give the player 15 points if not mark as 0
+             * 
+             * @param {int} playerNum specific player
+             */
+
+            function scoreMiniRun(playerClicked) {
+                clearLast(playerNum, tempDraw);
+                var total = 0;
+                miniRun = [false, false, false, false, false, false, false];
+                if (playerNum === 1 && player1Score[7] === " " && playerClicked === 1) {
+                    for (var i = 0; i < 5; i++) {
+                        miniRun[currentDice[i] - 1] = true;
+                    }
+                    if ((miniRun[3]) && ((miniRun[0] && miniRun[1] && miniRun[2]) || (miniRun[1] && miniRun[2] && miniRun[4]) || (miniRun[2] && miniRun[4] && miniRun[5]) || (miniRun[4] && miniRun[5] && miniRun[6])))
+                    {
+                        $("#miniRun1").val(30);
+                    } else {
+                        $("#miniRun1").val(0);
+                    }
+                    tempDraw = 7;
+                } else if (playerNum === 2 && player2Score[7] === " " && playerClicked === 2) {
+                    for (var i = 0; i < 5; i++) {
+                        miniRun[currentDice[i] - 1] = true;
+                    }
+                    if ((miniRun[3]) && ((miniRun[0] && miniRun[1] && miniRun[2]) || (miniRun[1] && miniRun[2] && miniRun[4]) || (miniRun[2] && miniRun[4] && miniRun[5]) || (miniRun[4] && miniRun[5] && miniRun[6])))
+                    {
+                        $("#miniRun2").val(30);
+                    } else {
+                        $("#miniRun2").val(0);
+                    }
+                    tempDraw = 7;
+                }
+            }
+
+            /**
+             * First checks if the spot is empty and then checks the dice 
+             * to see if a player has rolled a largeRun
+             * if a largeRun is found then give the player 50 points if not mark as 0
+             * 
+             * @param {int} playerNum specific player
+             */
+
+            function scoreBrokenRun(playerClicked) {
+                clearLast(playerNum, tempDraw);
+                var total = 0;
+                var brokenRun = [false, false, false, false, false, false, false];
+                if (playerNum === 1 && player1Score[8] === " " && playerClicked === 1) {
+                    for (var i = 0; i < 5; i++) {
+                        brokenRun[currentDice[i] - 1] = true;
+                    }
+                    if ((brokenRun[1] && brokenRun[5]) &&
+                            ((brokenRun[0] && brokenRun[3] && brokenRun[4]) || (brokenRun[0] && brokenRun[2] && brokenRun[4]) || (brokenRun[2]) && (brokenRun[4] && brokenRun[6]) || (brokenRun[2]) && (brokenRun[3] && brokenRun[6])))
+                    {
+                        document.getElementById("brokenRun1").value = 45;
+                    } else {
+                        document.getElementById("brokenRun1").value = 0;
+                    }
+                    tempDraw = 8;
+                } else if (playerNum === 2 && player2Score[8] === " " && playerClicked === 2) {
+
+                    for (var i = 0; i < 5; i++) {
+                        brokenRun[currentDice[i] - 1] = true;
+                    }
+                    if ((brokenRun[1] && brokenRun[5]) &&
+                            ((brokenRun[0] && brokenRun[3] && brokenRun[4]) || (brokenRun[0] && brokenRun[2] && brokenRun[4]) || (brokenRun[2]) && (brokenRun[4] && brokenRun[6]) || (brokenRun[2]) && (brokenRun[3] && brokenRun[6])))
+                    {
+                        document.getElementById("brokenRun2").value = 45;
+                    } else {
+                        document.getElementById("brokenRun2").value = 0;
+                    }
+                    tempDraw = 8;
+                }
+            }
+
+            function scoreScramble(playerClicked) {
+                clearLast(playerNum, tempDraw);
+                nameIndex = $('#nameScramble1').val();
+                switch (nameIndex) {
+                    case '0':
+                        scoreOnes(playerClicked, true);
+                        break;
+                    case '1':
+                        scoreTwos(playerClicked, true);
+                        break;
+                    case '2':
+                        scoreThrees(playerClicked, true);
+                        break;
+                    case '3':
+                        scoreFours(playerClicked, true);
+                        break;
+                    case '4':
+                        scoreFives(playerClicked, true);
+                        break;
+                    case '5':
+                        scoreSixes(playerClicked, true);
+                        break;
+                    case '6':
+                        scoreSevens(playerClicked, true);
+                        break;
+                }
+            }
+
+            function scoreHighLow(playerClicked) {
+                clearLast(playerNum, tempDraw);
+                var total = 0;
+                highLow = [false, false, false, false, false, false, false];
+                if (playerNum === 1 && player1Score[10] === " " && playerClicked === 1) {
+                    for (var i = 0; i < 5; i++) {
+                        highLow[currentDice[i] - 1] = true;
+                    }
+                    if (highLow[0] && highLow[6]) {
+                        total = totalDice();
+                    } else {
+                        total = 0;
+                    }
+                    $('#highLow1').val(total);
+                    tempDraw = 10;
+                } else if (playerNum === 2 && player2Score[10] === " " && playerClicked === 2) {
+                    for (var i = 0; i < 5; i++) {
+                        highLow[currentDice[i] - 1] = true;
+                    }
+                    if (highLow[0] && highLow[6]) {
+                        total = totalDice();
+                    } else {
+                        total = 0;
+                    }
+                    $('#highLow2').val(total);
+                    tempDraw = 10;
+                }
+            }
+
+            /** * Check is the space is available and checks to see if the player has rolled and 
+             * saved the dice for a fullHouse. If it has give the player the totaland 
+             * if not give them 0
+             * @param {int} playerNum takes in the current player
+             */
+
+            function scoreFullHouse(playerClicked) {
+                clearLast(playerNum, tempDraw);
+                var hasThreeOfAKind = false;
+                var hasPair = false;
+                var total = 0;
+                var total = hasThreeOfAKind && hasPair;
+                var diceCount = [0, 0, 0, 0, 0, 0, 0];
+                if (playerNum === 1 && playerClicked === 1) {
+                    if (player1Score[11] === " ") {
+                        for (var i = 0; i < 5; i++) {
+                            diceCount[currentDice[i] - 1] += 1;
+                        }
+                        for (i = 0; i < 8; i++) {
+                            if (diceCount[i] === 3) {
+                                hasThreeOfAKind = true;
+                            } else if (diceCount[i] === 2) {
+                                hasPair = true;
+                            }
+                        }
+                        if (checkHighFive()) {
+                            total += 75;
+                        }
+                        if (hasThreeOfAKind === true && hasPair === true) {
+                            total = 30;
+                        } else if (total !== 75) {
+                            total = 0;
+                        }
+                        document.getElementById("fullHouse1").value = total;
+                        tempDraw = 11;
+                    }
+                } else if (playerNum === 2 && playerClicked === 2) {
+                    if (player2Score[11] === " ") {
+                        for (var i = 0; i < 5; i++) {
+                            diceCount[currentDice[i] - 1] += 1;
+                        }
+                        for (i = 0; i < 8; i++) {
+                            if (diceCount[i] === 3) {
+                                hasThreeOfAKind = true;
+                            } else if (diceCount[i] === 2) {
+                                hasPair = true;
+                            }
+                        }
+                        if (checkHighFive()) {
+                            total += 75;
+                        }
+                        if (hasThreeOfAKind === true && hasPair === true) {
+                            total += 30;
+                        } else if (total !== 75) {
+                            total = 0;
+                        }
+                        document.getElementById("fullHouse2").value = total;
+                        tempDraw = 11;
+                    }
+                }
+            }
+
+            function checkHighFive() {
+                var highFive = false;
+                var diceCount = [0, 0, 0, 0, 0, 0, 0];
+                if ((playerNum === 1 && player1Score[11] === "75") || (playerNum === 2 && player2Score[11] === "75")) {
+                    for (var i = 0; i < 5; i++) {
+                        diceCount[currentDice[i] - 1] += 1;
+                    }
+                    for (i = 0; i < 8; i++) {
+                        if (diceCount[i] === 5) {
+                            highFive = true;
+                        }
+                    }
+                }
+                return highFive;
+            }
+
+            function scoreHighFive(playerClicked, checkScramble) {
+                clearLast(playerNum, tempDraw);
+                index = 12;
+                if (checkScramble) {
+                    index = 9;
+                }
+                if (playerNum === 1 && playerClicked === 1) {
+                    if (player1Score[index] === " ") {
+                        var total = 0;
+                        var temp = currentDice[0];
+                        for (var i = 0; i < 5; i++) {
+                            if (temp !== 0 && currentDice[i] !== 0 && temp === currentDice[i]) {
+                                total += 1;
+                            } else {
+                                total = 0;
+                            }
+                        }
+                        if (total === 5) {
+                            if (checkScramble) {
+                                $('#scramble1').val(60);
+                            } else {
+                                $('#highFive1').val(60);
+                            }
+                        } else {
+                            $('#highFive1').val(0);
+                        }
+                        tempDraw = index;
+                    }
+                } else if (playerNum === 2 && playerClicked === 2) {
+                    if (player2Score[index] === " ") {
+                        var total = 0;
+                        var temp = currentDice[0];
+                        for (var i = 0; i < 5; i++) {
+                            if (temp !== 0 && currentDice[i] !== 0 && temp === currentDice[i]) {
+                                total += 1;
+                            } else {
+                                total = 0;
+                            }
+                        }
+                        if (total === 5) {
+                            if (checkScramble) {
+                                $('#scramble2').val(60);
+                            } else {
+                                $('#highFive2').val(60);
+                            }
+                        } else {
+                            $('#highFive2').val(0);
+                        }
+                        tempDraw = index;
+                    }
+                }
+            }
+
+            /**
+             * Totals up all the even numbers on all the dice
+             * @param {type} playerClicked The specific button that was clicked
+             * @returns {undefined} N/A
+             */
+            function scoreEvens(playerClicked) {
+                clearLast(playerNum, tempDraw);
+                var total = 0;
+                if (playerNum === 1 && player1Score[13] === " " && playerClicked === 1) {
+                    for (var i = 0; i < 5; i++) {
+                        if (currentDice[i] % 2 == 0) {
+                            total += currentDice[i];
+                        }
+                    }
+                    $("#evens1").val(total);
+                    tempDraw = 13;
+                } else if (playerNum === 2 && player2Score[13] === " " && playerClicked === 2) {
+                    for (var i = 0; i < 5; i++) {
+                        if (currentDice[i] % 2 == 0) {
+                            total += currentDice[i];
+                        }
+                    }
+                    $("#evens2").val(total);
+                    tempDraw = 13;
+                }
+            }
+
+            /**
+             * Totals up all the even numbers on all the dice
+             * @param {type} playerClicked The specific button that was clicked
+             * @returns {undefined} N/A
+             */
+            function scoreOdds(playerClicked) {
+                clearLast(playerNum, tempDraw);
+                var total = 0;
+                if (playerNum === 1 && player1Score[14] === " " && playerClicked === 1) {
+                    for (var i = 0; i < 5; i++) {
+                        if (currentDice[i] % 2 !== 0) {
+                            total += currentDice[i];
+                        }
+                    }
+                    $("#odds1").val(total);
+                    tempDraw = 14;
+                } else if (playerNum === 2 && player2Score[14] === " " && playerClicked === 2) {
+                    for (var i = 0; i < 5; i++) {
+                        if (currentDice[i] % 2 !== 0) {
+                            total += currentDice[i];
+                        }
+                    }
+                    $("#odds2").val(total);
+                    tempDraw = 14;
+                }
+            }
+
+            function totalDice() {
+                var total = 0;
+                for (var i = 0; i < 5; i++) {
+                    total += currentDice[i];
+                }
+                return total;
+            }
+
+            /** * Check is the space is available and checks to see if the player has rolled and 
+             * saved the dice for a theeOfAKind. If it has give the player the totaland 
+             * if not give them 0
+             * @param {int} playerNum takes in the current player
+             */
+            function scoreTheeOfAKind(playerClicked) {
+                clearLast(playerNum, tempDraw);
+                var total = 0;
+                var diceCount = [0, 0, 0, 0, 0, 0, 0];
+                if (playerNum === 1 && playerClicked === 1) {
+                    if (player1Score[15] === " ") {
+                        for (var i = 0; i < 5; i++) {
+                            diceCount[currentDice[i] - 1] += 1;
+                        }
+                        for (i = 0; i < 8; i++) {
+                            if (diceCount[i] >= 3) {
+                                total = totalDice();
+                            }
+                        }
+                        if (total > 0) {
+                            if (checkHighFive()) {
+                                total += 75;
+                            }
+                            document.getElementById("threeOfAKind1").value = total;
+                        } else {
+                            document.getElementById("threeOfAKind1").value = 0;
+                        }
+                        tempDraw = 15;
+                    }
+                } else if (playerNum === 2 && playerClicked === 2) {
+                    if (player2Score[15] === " ") {
+                        for (var i = 0; i < 5; i++) {
+                            diceCount[currentDice[i] - 1] += 1;
+                        }
+                        for (i = 0; i < 8; i++) {
+                            if (diceCount[i] >= 3) {
+                                total = totalDice();
+                            }
+                        }
+                        if (total > 0) {
+                            if (checkHighFive()) {
+                                total += 75;
+                            }
+                            document.getElementById("threeOfAKind2").value = total;
+                        } else {
+                            document.getElementById("threeOfAKind2").value = 0;
+                        }
+                        tempDraw = 15;
+                    }
+                }
+            }
+            /** * Check is the space is available and checks to see if the player has rolled and 
+             * saved the dice for a fourOfAKind. If it has give the player the total and 
+             * if not give them 0
+             * @param {int} playerNum takes in the current player
+             */
+            function scoreFourOfAKind(playerClicked) {
+                clearLast(playerNum, tempDraw);
+                var total = 0;
+                var diceCount = [0, 0, 0, 0, 0, 0, 0];
+                if (playerNum === 1 && playerClicked === 1) {
+                    if (player1Score[16] === " ") {
+                        for (var i = 0; i < 5; i++) {
+                            diceCount[currentDice[i] - 1] += 1;
+                        }
+                        for (i = 0; i < 8; i++) {
+                            if (diceCount[i] >= 4) {
+                                total = totalDice();
+                            }
+                        }
+                        if (total > 0) {
+                            if (checkHighFive()) {
+                                total += 75;
+                            }
+                            document.getElementById("fourOfAKind1").value = total;
+                        } else {
+                            document.getElementById("fourOfAKind1").value = 0;
+                        }
+                        tempDraw = 16;
+                    }
+                } else if (playerNum === 2 && playerClicked === 2) {
+                    if (player2Score[16] === " ") {
+                        for (var i = 0; i < 5; i++) {
+                            diceCount[currentDice[i] - 1] += 1;
+                        }
+                        for (i = 0; i < 8; i++) {
+                            if (diceCount[i] >= 4) {
+                                total = totalDice();
+                            }
+                        }
+                        if (total > 0) {
+                            if (checkHighFive()) {
+                                total += 75;
+                            }
+                            document.getElementById("fourOfAKind2").value = total;
+                        } else {
+                            document.getElementById("fourOfAKind2").value = 0;
+                        }
+                        tempDraw = 16;
+                    }
+                }
+            }
+
+            /**
+             * Checks to see if the spot is avaiable and then adds up the total of the dice
+             * @param {int} playerNum takes in the current player number
+             */
+            function scoreChance(playerClicked) {
+                clearLast(playerNum, tempDraw);
+                if (playerNum === 1 && playerClicked === 1) {
+                    if (player1Score[17] === " ") {
+                        var total = 0;
+                        for (var i = 0; i < 5; i++) {
+                            total += currentDice[i];
+                        }
+                        document.getElementById("chance1").value = total;
+                        tempDraw = 17;
+                    }
+                } else if (playerNum === 2 && playerClicked === 2) {
+                    if (player2Score[17] === " ") {
+                        var total = 0;
+                        for (var i = 0; i < 5; i++) {
+                            total += currentDice[i];
+                        }
+                        document.getElementById("chance2").value = total;
+                        tempDraw = 17;
+                    }
+                }
+            }
+
+            /**
+             * Used to check each dice to see if it's the same as the spot
+             * If it is it adds the numbers and returns the total 
+             * @param {int} multiplier
+             * @return returns total  
+             */
+            function getTotal(multiplier) {
+                var total = 0;
+                for (var i = 0; i < 5; i++) {
+                    if (currentDice[i] === multiplier) {
+                        total += multiplier;
+                    }
+                }
+                if (checkHighFive()) {
+                    total += 75;
+                }
+                return total;
+            }
+            /**
+             * Used to hide the instructions
+             */
+            function hideInstructions() {
+//           $("#instructions").css("visibility","hidden");
+                $('#mainInstruction').show();
+                if (closeLevel === 1) {
+                    $("#instructions").fadeOut().delay(500);
+                    closeLevel = 0;
+                    if (pause < 60) {
+                        resumeTimer();
+                    }
+                } else if (closeLevel === 2) {
+                    $('#howToPlay').fadeOut().delay(200);
+                    $('#categories').fadeOut().delay(200);
+                    $('#howToWin').fadeOut().delay(200);
+                    $('#scrambleTimer').fadeOut().delay(200);
+                    $('#scramble').fadeOut().delay(200);
+                    $('#scoring').fadeOut().delay(200);
+                    $('#options').fadeOut().delay(200);
+                    $('#highScores').fadeOut().delay(200);
+                    closeLevel = 1;
+                } else if (closeLevel === 3) {
+                    $('#createAccount').fadeOut().delay(200);
+                    closeLevel = 2;
+                }
+            }
+            /**
+             * Used to show the instructions
+             */
+            function toggleInstructions() {
+                pauseTimer();
+                $("#instructions").css("visibility", "visible");
+                $("#instructions").fadeIn();
+                $('#mainInstruction').fadeIn().delay(500);
+                closeLevel = 1;
+            }
+
+            function getNumberOfPlayers(single) {
+                $('#singlePlayer').fadeOut().delay(300);
+                $('#newGame').css("visibility", "visible");
+                $('#newGame').hide();
+                $('#newGame').fadeIn().delay(300);
+                if (single) {
+                    multi = false;
+                } else {
+                    multi = true;
+                }
+            }
+
+            function newGame(continueGame) {
+                $('#newGame').fadeOut().delay(300);
+                $(".mainContainer").css("visibility", "visible");
+                $(".mainContainer").fadeIn().delay(300);
+                clearDice();
+                if (continueGame) {
+                    player = 2;
+                    newRound = false;
+                    loadBoard();
+                } else {
+                    player = 1;
+                }
+            }
+
+            function showPastGames() {
+            }
+
+            function howToPlay() {
+                $('#howToPlay').css("visibility", "visible");
+                $('#howToPlay').hide();
+                $('#howToPlay').fadeIn().delay(300);
+                closeLevel = 2;
+            }
+            function categories() {
+                $('#categories').css("visibility", "visible");
+                $('#categories').hide();
+                $('#categories').fadeIn().delay(300);
+                closeLevel = 2;
+            }
+            function howToWin() {
+                $('#howToWin').css("visibility", "visible");
+                $('#howToWin').hide();
+                $('#howToWin').fadeIn().delay(300);
+                closeLevel = 2;
+            }
+            function scrambleTimer() {
+                $('#scrambleTimer').css("visibility", "visible");
+                $('#scrambleTimer').hide();
+                $('#scrambleTimer').fadeIn().delay(300);
+                closeLevel = 2;
+            }
+            function scramble() {
+                $('#scramble').css("visibility", "visible");
+                $('#scramble').hide();
+                $('#scramble').fadeIn().delay(300);
+                closeLevel = 2;
+            }
+            function scoring() {
+                $('#scoring').css("visibility", "visible");
+                $('#scoring').hide();
+                $('#scoring').fadeIn().delay(300);
+                closeLevel = 2;
+            }
+            function highScores() {
+                $('#highScores').css("visibility", "visible");
+                $('#highScores').hide();
+                $('#highScores').fadeIn().delay(300);
+                closeLevel = 2;
+            }
+
+            function options() {
+                $('#options').css("visibility", "visible");
+                $('#options').hide();
+                $('#options').fadeIn().delay(300);
+                closeLevel = 2;
+            }
+
+            function createAccount() {
+                $('#createAccount').css("visibility", "visible");
+                $('#createAccount').hide();
+                $('#createAccount').fadeIn().delay(300);
+                closeLevel = 3;
+            }
+
+            var currentDate = function (sp) {
+                today = new Date();
+                var dd = today.getDate();
+                var mm = today.getMonth() + 1; //As January is 0.
+                var yyyy = today.getFullYear();
+
+                if (dd < 10)
+                    dd = '0' + dd;
+                if (mm < 10)
+                    mm = '0' + mm;
+                return (mm + sp + dd + sp + yyyy);
+            };
+
+            function saveGame() {
+                $.ajax({
+                    type: 'post',
+                    url: 'https://csunix.mohawkcollege.ca/~000774370/private/60s/savegame.php',
+                    data: {
+                        gameNumber: gameNumber,
+                        whose_turn: playerNum,
+                        player1: 101,
+                        player2: 102,
+                        start_date: currentDate
+                    },
+                    success: function (response) {
+                        if (response != "success") {
+                            $('.rollButton').val(response);
+                        }
+                    }
+                });
+
+                return false;
+            }
+
+            function submitPlayerInfo()
+            {
+                $.ajax({
+                    type: 'post',
+                    url: 'https://csunix.mohawkcollege.ca/~000774370/private/60s/saveplayer.php',
+                    data: {
+                        firstName: $('#firstName').val(),
+                        lastName: $('#lastName').val(),
+                        userName: $('#userName').val(),
+                        email: $('#email').val()
+                    },
+                    success: function (response) {
+                        $('#formResult').html(response);
+                        if (response === "success") {
+                            $('#formResult').html("Welcome " + $('#userName').val() + "!");
+                        }
+                    }
+                });
+
+                return false;
+            }
+
+            function submitdata()
+            {
+                $.ajax({
+                    type: 'post',
+                    url: 'https://csunix.mohawkcollege.ca/~000774370/private/60s/saveboard.php',
+                    data: {
+                        scoreOnes1: player1Score[0],
+                        scoreOnes2: player2Score[0],
+                        scoreTwos1: player1Score[1],
+                        scoreTwos2: player2Score[1],
+                        scoreThrees1: $('#' + player1ScoreList[2]).val(),
+                        scoreThrees2: $('#' + player2ScoreList[2]).val(),
+                        scoreFours1: $('#' + player1ScoreList[3]).val(),
+                        scoreFours2: $('#' + player2ScoreList[3]).val(),
+                        scoreFives1: $('#' + player1ScoreList[4]).val(),
+                        scoreFives2: $('#' + player2ScoreList[4]).val(),
+                        scoreSixes1: $('#' + player1ScoreList[5]).val(),
+                        scoreSixes2: $('#' + player2ScoreList[5]).val(),
+                        scoreSevens1: $('#' + player1ScoreList[6]).val(),
+                        scoreSevens2: $('#' + player2ScoreList[6]).val(),
+                        scoreMiniRun1: $('#' + player1ScoreList[7]).val(),
+                        scoreMiniRun2: $('#' + player2ScoreList[7]).val(),
+                        scoreBrokenRun1: $('#' + player1ScoreList[8]).val(),
+                        scoreBrokenRun2: $('#' + player2ScoreList[8]).val(),
+                        scoreScramble1: $('#' + player1ScoreList[9]).val(),
+                        scoreScramble2: $('#' + player2ScoreList[9]).val(),
+                        scoreHighLow1: $('#' + player1ScoreList[10]).val(),
+                        scoreHighLow2: $('#' + player2ScoreList[10]).val(),
+                        scoreFullHouse1: $('#' + player1ScoreList[11]).val(),
+                        scoreFullHouse2: $('#' + player2ScoreList[11]).val(),
+                        scoreHighFive1: $('#' + player1ScoreList[12]).val(),
+                        scoreHighFive2: $('#' + player2ScoreList[12]).val(),
+                        scoreEvens1: $('#' + player1ScoreList[13]).val(),
+                        scoreEvens2: $('#' + player2ScoreList[13]).val(),
+                        scoreOdds1: $('#' + player1ScoreList[14]).val(),
+                        scoreOdds2: $('#' + player2ScoreList[14]).val(),
+                        scoreTriple1: $('#' + player1ScoreList[15]).val(),
+                        scoreTriple2: $('#' + player2ScoreList[15]).val(),
+                        scoreQuartet1: $('#' + player1ScoreList[16]).val(),
+                        scoreQuartet2: $('#' + player2ScoreList[16]).val(),
+                        bonus1: $('#bonus1').val(),
+                        bonus2: $('#bonus2').val(),
+                        player1Total: player1Total,
+                        player2Total: player2Total,
+                        gameNumber: gameNumber,
+                        playerTurn: playerNum,
+                        round: rounds,
+                        countDown: pause
+                    },
+                    success: function (response) {
+                        if (response != "success") {
+                            $('.rollButton').val(response);
+                        }
+                    }
+                });
+
+                return false;
+            }
+
+            function processForm() {
+                $.ajax({
+                    type: 'post',
+                    url: 'https://csunix.mohawkcollege.ca/~000774370/private/60s/loadboard.php',
+                    data: 'JSON',
+                    success: function (data) {
+                        scoresUpdate = JSON.parse(data);
+                        blackOuts = 0;
+                        for (var i = 2; i < 17; i++) {
+                            $('#' + player1ScoreList[i]).css("background-color", "white").val(scoresUpdate.scores[0][i]);
+                            player1Score[i] = scoresUpdate.scores[0][i];
+                            if ($('#' + player1ScoreList[i]).val() === 'X') {
+                                $('#' + player1ScoreList[i]).css("background-color", "gold");
+                                player1Score[i] = 0;
+                                blackOuts += 1;
+                            }
+                            $('#' + player2ScoreList[i]).css("background-color", "white").val(scoresUpdate.scores[1][i]);
+                            player2Score[i] = scoresUpdate.scores[1][i];
+                            if ($('#' + player2ScoreList[i]).val() === 'X') {
+                                $('#' + player2ScoreList[i]).css("background-color", "gold");
+                                player2Score[i] = 0;
+                            }
+                        }
+                        if (scoresUpdate.scores[2][0] != " ") {
+                            $('#bonus1').val(parseInt(scoresUpdate.scores[2][0]));
+                        }
+                        if (scoresUpdate.scores[2][1] != " ") {
+                            $('#bonus2').val(parseInt(scoresUpdate.scores[2][1]));
+                        }
+                        player1Total = parseInt(scoresUpdate.scores[2][2]);
+                        $('#total1').val(player1Total);
+                        player2Total = parseInt(scoresUpdate.scores[2][3]);
+                        $('#total2').val(player2Total);
+                        playerNum = parseInt(scoresUpdate.scores[2][5]);
+                        rounds = parseInt(scoresUpdate.scores[2][6]);
+                        pause = parseInt(scoresUpdate.scores[2][7]);
+                        if (playerNum != player) {
+                            $('.rollButton').val("Waiting for " + user[playerNum - 1]);
+                        } else {
+                            $('.rollButton').val(user[playerNum - 1] + " you're up!");
+                            if (load) {
+                                clearTimeout(id);
+                                resumeTimer();
+                                load = false;
+                            }
+                        }
+                        if (playerNum === 1) {
+                            $('.rollButton').css("background-color", "#53ff1a");
+                        } else {
+                            $('.rollButton').css("background-color", "gold");
+                        }
+
+                    }
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <div id="startContainer">	
+            <div id="login">
+                <div id = "timerBox1">
+                    <div id="timer1">60</div>
+                    <div id = "timerLabel1">Second SCRAMBLE</div>
+                </div>	
+                <h1><span class="purple">Login</span></h1>
+                <form>
+                    <div>
+                        <label class="first2" for = "userName">Username</label>
+                        <input class="text2"  type = "text" name = "userName">
+                    </div>
+                    <div>
+                        <label class="first2" for = "passWord">Password</label>
+                        <input class="text2" id="passWord" type = "password" name = "passWord">
+                    </div>
+
+                    <div>
+                        <input class = "loginButton" type="button" value="Login">
+                    </div>
+                    <div>
+                        <input class = "guestButton" onclick="newGame()" type="button" value="Play as guest">
+                    </div> 
+                    <div>
+                        <input class = "newAccountLinkButton" onclick= "createAccount()" type="button" value="Create new Account">
+                    </div> 
+                </form>	
+            </div>			
+            <!-- <div>
+                 <input class="singlePlayerButton" onclick="getNumberOfPlayers(true);" type="button" value="Single-Player">
+             </div>-->
+            <div id="singlePlayer">
+                <div id = "timerBox1">
+                    <div id="timer1">60</div>
+                    <div id = "timerLabel1">Second SCRAMBLE</div>
+                </div>	
+                <div>
+                    <input class="singlePlayerButton" onclick="getNumberOfPlayers(true);" type="button" value="Play Offline">
+                </div>
+                <div>
+                    <input class="multiPlayerButton" onclick="getNumberOfPlayers(false);" type="button" value="Play Online">
+                </div> 			
+            </div>	
+            <div id= "newGame">
+                <div id = "timerBox1">
+                    <div id="timer1">60</div>
+                    <div id = "timerLabel1">Second SCRAMBLE</div>
+                </div>
+                <div>
+                    <input class="newGameButton" onclick="newGame(false);" type="button" value="New Game">
+                </div>
+                <div>
+                    <input class="continueGameButton " onclick="newGame(true);" type="button" value="Continue Game">
+                </div> 
+            </div>
+
+            <div id = "selectPlayer">
+                <div id = "timerBox1">
+                    <div id="timer1">60</div>
+                    <div id = "timerLabel1">Second SCRAMBLE</div>
+                </div>
+                <div>
+                    <input class="selectButton" readonly value="Select Player">
+                </div>
+                <table class= "selectTable">
+                    <tr>
+                        <td>
+                            <label>TassieRocks</label>
+                            <input class = "selectPlayerButton" type="button" value="Select Player">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>EcstaticBadger</label>
+                            <input class = "selectPlayerButtonButton2" type="button" value="Select Player">
+                        </td>
+                    </tr>
+                </table>
+
+                <div>
+                    <input class="randomButton" type="button" value="Random Player">
+                </div>
+            </div>
+            <div id="currentGames">
+                <div id = "timerBox1">
+                    <div id="timer1">60</div>
+                    <div id = "timerLabel1">Second SCRAMBLE</div>
+                </div>
+                <h1 class="h1">Current Games:</h1>
+                <table class= "currentTable">
+                    <tr>
+                        <td>
+                            <label class ="label">TassieRocks</label>
+                            <input class = "playTurnButton" type="button" value="Play Turn">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class ="label">EcstaticBadger</label>
+                            <input class = "playTurnButton2" type="button" value="Play Turn">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class = "mainContainer">
+            <div id = "timerBox">
+                <div id="timer">60</div>
+                <div id = "timerLabel" onclick="toggleInstructions()">Second SCRAMBLE</div>
+            </div>
+            <div id="again">
+                <div id="winners">
+                    <p>Congratulations</p>
+                    <p id="winner">Player <p>
+                </div>
+                <div id="again2">
+                    <p>Play Again?</p>
+                    <input id="yes" type="button" value="yes" onclick="clearScores()">
+                    <input id="no" type="button" value="no" onclick="window.open('', '_self', '');
+                            window.close();">
+                </div>
+            </div>
+            <div id="instructions">
+                <div id="howToPlay">						
+                    <h1><span class="purple">How to Play</span></h1>
+                    <p class="p">To start the game, begin by tapping on the  "Start"button.</p>
+                    <p class="p"><span class="purple">Each player can use upto 4 rolls to fill an empty box on their side.</span></p>
+                    <p class="p">Each player must meet or beat the basic rule for each category or take a 0 for that box.</p>
+                    <p class="p"><span class="purple">Choose a category that works best with your current dice.</span></p>
+                    <p class="p">Next, tap on any dice you want to save then push the "Roll the Dice" button to spin the remaining dice.</P>
+                    <p class="p"><span class="purple">When you are satisfied with your roll, tap the empty box next to the category you have chosen. This will display the number of points you can receive.</span> </p>
+                    <p class="p">Tap the "Save Roll" button to save your score and end your turn.</p>					
+                </div>
+                <div id="categories">
+                    <h1><span class="purple">categories</span></h1>
+                    <p class="p"><span class="catColor">3 till 7:</span>Get as much of the same number.</p>
+                    <p class="p"><span class="catColor">BONUS:</span>Score 75 points or more.</p>
+                    <p class="p"><span class="catColor">MINI RUN:</span>Get 4 dices in a sequence.</p>
+                    <p class="p"><span class="catColor">BROKEN RUN:</span>It is like a run but skip 1 dice.</p>
+                    <p class="p"><span class="catColor">SCRAMBLE:</span>It changes every 15 seconds.</p>
+                    <p class="p"><span class="catColor">HIGH/LOW:</span>You must have a 1 and 7.</p>
+                    <p class="p"><span class="catColor">HIGH FIVE:</span>5 of the same dice</p>
+                    <p class="p"><span class="catColor">EVENS:</span>Adds all even numbers</p>
+                    <p class="p"><span class="catColor">ODDS:</span>Adds all odd numbers</p>
+                    <p class="p"><span class="catColor">TRIPLE:</span>At least 3 of the same dice</p>
+                    <p class="p"><span class="catColor">QUARTET:</span>At least 4 of the same dice</p>
+                    <p class="p"><span class="catColor">CHANCE:</span>Any combination of dice</p>
+                </div>
+                <div id="howToWin">
+                    <h1><span class="purple">How to win</span></h1>
+                    <p class="p">HOW TO WIN THE GAME !!</p><br>
+                    <p class="p"><span class="purple">When all the boxes are filled, the game will total up all your points.</span></p><br>
+                    <p class="p">This will include the top half points, the bottom half points and any bonuses you might have earned.</p><br>
+                    <p class="p"><span class="purple">The player with the most points WINS</span></p><br>
+                    <p class="p">And remember, the faster you play the less boxes are scrambled shut and the more points can be earned.</p>
+                </div>
+                <div id="scrambleTimer">
+                    <h1><span class="purple">Scramble timer</span></h1>
+                    <p class="p">The 60 second timer counts down to zero.</p><br>
+                    <p class="p"><span class="purple">When it reaches zero one of the Categories</span></p><br>
+                    <p class="p">is randomly shut for both player.</p><br>
+                    <p class="p"><span class="purple">Every 60 seconds the timer starts again.</span></p><br>
+                    <p class="p">So play as fast as you can to try </p>
+                    <p class="p"><span class="purple">and keep as many of the high scoring boxes as possible! </span></p>
+                </div>
+                <div id="scramble">
+                    <h1><span class="purple">Scramble</span></h1>
+                    <p class="p">This category changes every 15 seconds.</p><br>
+                    <p class="p"><span class="purple">it changes between the categories</span></p>
+                    <p class="p"><span class="purple">one to seven</span></p><br>
+                    <p class="p">So be quick if you want the category </p>
+                    <p class="p">shown at that moment because it can</p>
+                    <p class="p">gone before you know it !! </p>
+                </div>
+                <div id="scoring">
+                    <h1><span class="purple">Scoring</span></h1>
+                    <p class="p"><span class="catColor">3 till 7:</span>Counts all the same dice</p>
+                    <p class="p"><span class="catColor">BONUS:</span>45 points</p>
+                    <p class="p"><span class="catColor">MINI RUN:</span>30 points</p>
+                    <p class="p"><span class="catColor">BROKEN RUN:</span>45 points</p>
+                    <p class="p"><span class="catColor">SCRAMBLE:</span>Depends on input</p>
+                    <p class="p"><span class="catColor">HIGH/LOW:</span>Depends on input</p>
+                    <p class="p"><span class="catColor">HIGH FIVE:</span>75 points</p>
+                    <p class="p"><span class="catColor">EVENS:</span>Adds all even numbers</p>
+                    <p class="p"><span class="catColor">ODDS:</span>Adds all odd numbers</p>
+                    <p class="p"><span class="catColor">TRIPLE:</span>Depends on input</p>
+                    <p class="p"><span class="catColor">QUARTET:</span>Depends on input</p>
+                    <p class="p"><span class="catColor">CHANCE:</span>Depends on input</p>
+                </div>
+                <div id="options">
+                    <h1><span class="purple">Options</span></h1>
+                    <div id="optionsInput">
+                        <p class="p">sound
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </p>
+                        <p class="p"><span class="purple">vibration</span>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </p>
+                        <p class="p">notifications
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider round"></span>
+                            </label>
+                        </p>
+
+                        <li class="list2"><p onclick="createAccount()">Create or Update Account</p></li>
+                        <div id="createAccount">
+                            <form id="playerForm" name="playerForm" action="" method="Post" onsubmit="return submitPlayerInfo();">
+                                <div class="playerInfo">
+                                    <label class="first1" for = "firstName">First Name</label>
+                                    <input id="firstName" class="text1" type = "text" name="firstName" size = "40" maxlength = "40">
+                                </div>
+                                <br>
+                                <div class="playerInfo">
+                                    <label class="first1" for = "lastName">Last Name</label>
+                                    <input id="lastName" class="text1"  type = "text" name="lastName" size = "40" maxlength = "40">
+                                </div>
+                                <br>
+                                <div class="playerInfo">
+                                    <label class="first1"  for = "userName"> User Name</label>
+                                    <input id="userName" class="text1"  type = "text" name="userName" size = "40" maxlength = "40">
+                                </div>
+                                <br>
+                                <div class="playerInfo">
+                                    <label class="first1"  for="emailAddress">Email Address</label>
+                                    <input id="email" class="text1"  type="email" name="emailAddress" size = "40" maxlength = "40" placeholder = "name@anywhere.com">
+                                </div> 
+
+                                <div class="playerInfo">
+                                    <label class="first2" for = "passWord">Password</label>
+                                    <input class="password2" id="passWord" type = "password" name = "passWord">
+                                </div>								
+                                <div>
+                                    <input class="save" type="button" onclick="$('#playerForm').submit();" value="Save">
+                                </div>
+                                <br/>
+                                <div id="formResult">
+                                </div>                          
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div id="highScores">
+                    <h1><span class="purple">High Scores</span></h1>
+
+                    <tbody>
+                    <table>
+                        <tr>
+                            <th><span class="catColor">Ranking</span></th>	
+                            <td class="td"></td>	
+                            <td class="td"><span class="catColor">Name</span></td>	
+                            <td class="td"></td>		
+                            <td class="td"><span class="catColor">Date</span></td>	
+                            <td class="td"></td>						
+                            <td class="td"><span class="catColor">Score</span></td>
+                        <tr>
+                            <th class = "ranking">1st </th>
+                            <td class="td"></td>
+                            <td class="td"><strong>Natasja</strong></td>
+                            <td class="td"></td>
+                            <td class="td"><strong>02/16/19</strong></td>	
+                            <td class="td"></td>	
+                            <td class="td"><strong>394</strong></td>
+                        </tr>
+                        <tr>
+                            <th class="ranking">2nd </th>
+                            <td class="td"></td>
+                            <td class="td"><strong>Christine</strong></td>
+                            <td class="td"></td>
+                            <td class="td"><strong>01/16/19</strong></td>	
+                            <td class="td"></td>	
+                            <td class="td"><strong>374</strong></td>
+                        </tr>
+                        <tr>
+                            <th class= "ranking">3rd </th>
+                            <td class="td"></td>
+                            <td class="td"><strong>Mark-Jason</strong></td>
+                            <td class="td"></td>
+                            <td class="td"><strong>02/16/19</strong></td>	
+                            <td class="td"></td>	
+                            <td class="td"><strong>314</strong></td>
+                        </tr>
+
+                        <tr>
+                            <th class= "ranking">4th </th>
+                            <td class="td"></td>
+                            <td class="td"><strong>Vaughn</strong></td>
+                            <td class="td"></td>
+                            <td class="td"><strong>02/16/19</strong></td>	
+                            <td class="td"></td>	
+                            <td class="td"><strong>294</strong></td>
+                        </tr>
+                        <tr>
+                            <th class="ranking">5th </th>
+                            <td class="td"></td>
+                            <td class="td"><strong>Nick</strong></td>
+                            <td class="td"></td>
+                            <td class="td"><strong>02/16/19</strong></td>	
+                            <td class="td"></td>	
+                            <td class="td"><strong>274</strong></td>
+                        </tr>
+                        <tr>
+                            <th class= "ranking">6th </th>
+                            <td class="td"></td>
+                            <td class="td"><strong>Clementine</strong></td>
+                            <td class="td"></td>
+                            <td class="td"><strong>02/16/19</strong></td>	
+                            <td class="td"></td>	
+                            <td class="td"><strong>214</strong></td>
+                        </tr>
+                        <tr>
+                            <th class= "ranking">7th </th>
+                            <td class="td"></td>
+                            <td class="td"><strong>Tamara</strong></td>
+                            <td class="td"></td>
+                            <td class="td"><strong>02/16/19</strong></td>	
+                            <td class="td"></td>	
+                            <td class="td"><strong>194</strong></td>
+                        </tr>
+                        <tr>
+                            <th class= "ranking">8th </th>
+                            <td class="td"></td>
+                            <td class="td"><strong>Gideon</strong></td>
+                            <td class="td"></td>
+                            <td class="td"><strong>02/16/19</strong></td>	
+                            <td class="td"></td>	
+                            <td class="td"><strong>104</strong></td>
+                        </tr>
+                        <tr>
+                            <th class= "ranking">9th </th>
+                            <td class="td"></td>
+                            <td class="td"><strong>Hank</strong></td>
+                            <td class="td"></td>
+                            <td class="td"><strong>02/16/19</strong></td>	
+                            <td class="td"></td>	
+                            <td class="td"><strong>095</strong></td>
+                        </tr>
+                        <tr>
+                            <th class="ranking">10th </th><br>
+                        <td class="td"></td>
+                        <td class="td"><strong>Bob</strong></td>
+                        <td class="td"></td>
+                        <td class="td"><strong>02/16/19</strong></td>	
+                        <td class="td"></td>	
+                        <td class="td"><strong>094</strong></td>
+                        </tr>
+                    </table>
+                </div>
+
+                <ul id="mainInstruction">
+                    <li class="list"><p onclick="howToPlay()"><span class="red">How </span><span class="green">to Play</span></p></li>
+                    <li class="list"><p onclick ="categories()">Categories</p></li>
+                    <li class="list"><p onclick="howToWin()">How to Win</p></li>
+                    <li class="list"><p onclick="scrambleTimer()">Scramble timer</p></li>
+                    <li class="list"><p onclick="scramble()">Scramble</p></li>
+                    <li class="list"><p onclick="scoring()">Scoring</p></li>
+                    <li class="list"><p onclick="highScores()">High Scores</p></li>
+                    <li class="list"><p onclick="options()">Options</p></li>
+                    <input id="closeme" onclick="hideInstructions()" type="button" value ="Close me">
+                </ul>
+
+            </div>
+            <form id="saveForm" name="saveForm" action="" method="Post" onsubmit="return submitdata();">
+                <!-- scoring section player 1 left side-->
+                <div class ="player1LeftSideScoringContainer" >
+                    <table><th class= "players"><i>PLAYER ONE</i></th><th></th><th class= "players"><i>PLAYER TWO</i></th><br>
+                        <tr>
+                            <td><input onclick = "scoreThrees(1)" class="score1" name="scoreThrees1" id="threes1" value=" " size = "4" readonly></td>
+                            <td class ="catagories" input type= "text">Three's</td>
+                            <td><input onclick = "scoreThrees(2)" class="score" name="scoreThrees2"id="threes2" value=" " size = "4" readonly></td>
+                        </tr>
+                        <tr>
+                            <td><input onclick = "scoreFours(1)" type="text" class="score1" name="scoreFours1" id="fours1" size = "4" value=" " readonly></td>
+                            <td class ="catagories" input type= "text">Four's</td>
+                            <td><input onclick = "scoreFours(2)" type="text" class="score" name="scoreFours2" id="fours2" size = "4" value=" " readonly></td>
+                        </tr>
+                        <tr>
+                            <td><input onclick = "scoreFives(1)"  type="text" class="score1" name="scoreFives1" id="fives1"size = "4" value=" " readonly></td>
+                            <td class ="catagories" input type= "text">Five's</td>
+                            <td><input onclick = "scoreFives(2)"  type="text" class="score" name="scoreFives2" id="fives2"size = "4" value=" " readonly></td>
+                        </tr>
+                        <tr>
+                            <td><input onclick = "scoreSixes(1)"  type="text" class="score1" name="scoreSixes1" id="sixes1" size = "4" value=" " readonly></td>
+                            <td class ="catagories" input type= "text">Sixes</td>
+                            <td><input onclick = "scoreSixes(2)"  type="text" class="score" name="scoreSixes2" id="sixes2" size = "4" value=" " readonly></td>
+                        </tr>
+                        <tr>
+                            <td><input onclick = "scoreSevens(1)"  type="text" class="score1" name="scoreSevens1" id="sevens1" size = "4" value=" " readonly></td>
+                            <td class ="catagories" input type= "text">Sevens</td>
+                            <td><input onclick = "scoreSevens(2)"  type="text" class="score" name="scoreSevens2" id="sevens2" size = "4" value=" " readonly></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" class="total1" id="bonus1" size = "4" value=" " name="bonus1" readonly></td>
+                            <td class ="catagories" input type= "text">Bonus</td>
+                            <td><input type="text" class="total" id="bonus2" size = "4" value=" " name="bonus2" readonly></td>
+                        </tr>
+                        <tr>
+                            <td><input onclick = "scoreMiniRun(1)" type="text" class="score1" id="miniRun1" size = "4" value=" " readonly></td>
+                            <td class ="catagories" input type= "text">Mini Run</td>
+                            <td><input onclick = "scoreMiniRun(2)" type="text" class="score" id="miniRun2" size = "4" value=" " readonly></td>
+                        </tr>
+                        <tr>
+                            <td><input onclick = "scoreBrokenRun(1)" type="text" class="score1" id="brokenRun1" size = "4" value=" " readonly></td>
+                            <td class ="catagories"input type= "text">Broken Run</td>
+                            <td><input onclick = "scoreBrokenRun(2)" type="text" class="score" id="brokenRun2" size = "4" value=" " readonly></td>
+                        </tr>
+                        <td><input onclick = "scoreScramble(1)" class="score1" id="scramble1" size = "4" value=" " readonly></td>
+                        <td class = "scrambleStyle"id="nameScramble1" input type= "text">Scramble</td>
+                        <td><input onclick = "scoreScramble(2)" class="score" id="scramble2" size = "4" value=" " readonly></td>
+                        </tr>
+                        <tr>
+                            <td><input onclick = "scoreHighLow(1)" class="score1" id="highLow1" size = "4" value=" " readonly></td>
+                            <td class ="catagories" input type= "text">High Low</td>
+                            <td><input onclick = "scoreHighLow(2)" class="score" id="highLow2" size = "4" value=" " readonly></td>   
+                        </tr>
+                        <tr>
+                            <td><input onclick = "scoreFullHouse(1)"  type="text" class="score1" id="fullHouse1" size = "4" value=" " readonly></td>
+                            <td class ="catagories" input type= "text">Full house</td>
+                            <td><input onclick = "scoreFullHouse(2)"  type="text" class="score" id="fullHouse2" size = "4" value=" " readonly></td>
+                        </tr>
+                        <tr>
+                            <td><input onclick = "scoreHighFive(1)"  type="text" class="score1" id="highFive1" size = "4" value=" " readonly></td>
+                            <td class ="catagories" input type= "text">High Five</td>
+                            <td><input onclick = "scoreHighFive(2)"  type="text" class="score" id="highFive2" size = "4" value=" " readonly></td>
+                        </tr>
+                        <tr>
+                            <td><input onclick = "scoreEvens(1)"  type="text" class="score1" id="evens1" size = "4" value=" " readonly></td>
+                            <td class ="catagories" input type= "text">Evens</td>
+                            <td><input onclick = "scoreEvens(2)"  type="text" class="score" id="evens2" size = "4" value=" " readonly></td>
+                        </tr>
+                        <tr>
+                            <td><input onclick = "scoreOdds(1)"  type="text" class="score1" id="odds1" size = "4" value=" " readonly></td>
+                            <td class ="catagories" input type= "text">Odds</td>
+                            <td><input onclick = "scoreOdds(2)"  type="text" class="score" id="odds2" size = "4" value=" " readonly></td>
+                        </tr>
+                        <tr>
+                            <td><input onclick = "scoreTheeOfAKind(1)"  type="text" class="score1" id="threeOfAKind1" size = "4" value=" " readonly></td>
+                            <td class ="catagories" input type= "text">Triple</td>
+                            <td><input onclick = "scoreTheeOfAKind(2)"  type="text" class="score" id="threeOfAKind2" size = "4" value=" " readonly></td>
+                        </tr>
+                        <tr>
+                            <td><input onclick = "scoreFourOfAKind(1)"  type="text" class="score1" id="fourOfAKind1" size = "4" value=" " readonly></td>
+                            <td class ="catagories" input type= "text">Quartet</td>
+                            <td><input onclick = "scoreFourOfAKind(2)"  type="text" class="score" id="fourOfAKind2" size = "4" value=" " readonly></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" class="total1" id="total1" size = "4" value=" " readonly></td>
+                            <td class ="catagories" input type= "text">Total</td>
+                            <td><input type="text" class="total" id="total2" size = "4" value=" " readonly></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class ="topLeftContainer" >
+                    <table id="dice1" >
+                        <tr>
+                            <td>
+                                <table onclick="hold(1)" class="dots" id="player1Dice1">
+                                    <tr>
+                                        <td class = "dot" id = "one1"> </td>
+                                        <td class = "dot" id = "two1"> </td>
+                                        <td class = "dot" id = "three1"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td class = "dot" id = "four1"> </td>
+                                        <td class = "dot" id = "five1"> </td>
+                                        <td class = "dot" id = "six1"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td class = "dot" id = "seven1"> </td>
+                                        <td class = "dot" id = "eight1"> </td>
+                                        <td class = "dot" id = "nine1"> </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td onclick="hold(2)">
+                                <table class = "dots" id="player1Dice2">
+                                    <tr>
+                                        <td class = "dot" id = "one2"> </td>
+                                        <td class = "dot" id = "two2"> </td>
+                                        <td class = "dot" id = "three2"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td class = "dot" id = "four2"> </td>
+                                        <td class = "dot" id = "five2"> </td>
+                                        <td class = "dot" id = "six2"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td class = "dot" id = "seven2"> </td>
+                                        <td class = "dot" id = "eight2"> </td>
+                                        <td class = "dot" id = "nine2"> </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td onclick="hold(3)">
+                                <table class = "dots" id="player1Dice3">
+                                    <tr>
+                                        <td class = "dot" id = "one3"> </td>
+                                        <td class = "dot" id = "two3"> </td>
+                                        <td class = "dot" id = "three3"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td class = "dot" id = "four3"> </td>
+                                        <td class = "dot" id = "five3"> </td>
+                                        <td class = "dot" id = "six3"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td class = "dot" id = "seven3"> </td>
+                                        <td class = "dot" id = "eight3"> </td>
+                                        <td class = "dot" id = "nine3"> </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td onclick="hold(4)">
+                                <table class = "dots" id="player1Dice4">
+                                    <tr>
+                                        <td class = "dot" id = "one4"> </td>
+                                        <td class = "dot" id = "two4"> </td>
+                                        <td class = "dot" id = "three4"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td class = "dot" id = "four4"> </td>
+                                        <td class = "dot" id = "five4"> </td>
+                                        <td class = "dot" id = "six4"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td class = "dot" id = "seven4"> </td>
+                                        <td class = "dot" id = "eight4"> </td>
+                                        <td class = "dot" id = "nine4"> </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td onclick="hold(5)">
+                                <table class = "dots" id="player1Dice5">
+                                    <tr>
+                                        <td class = "dot" id = "one5"> </td>
+                                        <td class = "dot" id = "two5"> </td>
+                                        <td class = "dot" id = "three5"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td class = "dot" id = "four5"> </td>
+                                        <td class = "dot" id = "five5"> </td>
+                                        <td class = "dot" id = "six5"> </td>
+                                    </tr>
+                                    <tr>
+                                        <td class = "dot" id = "seven5"> </td>
+                                        <td class = "dot" id = "eight5"> </td>
+                                        <td class = "dot" id = "nine5"> </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>  
+                <div class= "bothButtons">
+                    <div>
+                        <input class = "rollButton" type="button" onclick="rollDice()" value="Click Here to START">
+                    </div>
+                    <div>
+                        <input class = "saveButton" type= "button" onclick = "saveScore()" value="Save roll">
+                    </div> 
+                </div>
+            </form>
+        </div><!-- main container-->
+    </body>
+</html>
